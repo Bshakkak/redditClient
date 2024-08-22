@@ -1,16 +1,21 @@
 .navbar{
+    position: fixed;
+    top: 0; left: 0;
+    z-index: 10;
     width: 100%;
     height: 4.3125rem;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid black;
 }
 
 .logoContainer{
-    padding: 0.5rem 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-left: 3%;
+    width: fit-content;
     height: 100%;
-    width: 33%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -25,14 +30,28 @@
     height: 3rem;
     padding-bottom: 0.2rem;
 }
+.menuIcon{
+    width: 2.2rem;
+    height: 2.2rem;
+    padding-bottom: 0.2rem;
+    cursor: pointer;
+    display: none;
+    margin-right: 0.2rem;
+}
 
 .searchBTN{
     width: 1.5rem;
     object-fit: contain;
 }
 
-.formNav{
-    width: 33%;
+.formContainer{
+    margin-right: 3%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.formSearch{
     height: 100%;
     display: flex;
     justify-content: center;
@@ -42,26 +61,60 @@
 .formInput {
     background-color: gainsboro;
     padding: 0.5rem 1rem;
+    width: 20rem;
     border: none;
     outline: none;
-    width: 90%;
     font-size: 0.8rem;
     border-radius: 0.4rem;
 }
 
 .searchBTNContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: transparent;
     padding: 0.5rem;
-    width: 10%;
     border: none;
     outline: none;
     cursor: pointer;
 }
 
-.toggleContainer{
-    height: 100%;
-    width: 33%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.toggleSwitchNav {
+    display: block;
+}
+.formSearchMini{
+    display: none;
+}
+
+@media only screen and (max-width: 769px){
+    .formSearch{
+        display: none;
+    }
+    .formContainer{
+        width: 100%;
+        justify-content: flex-end;
+    }
+    .formSearchMini{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+    .formSearchMini .formInput{
+        width: 100%;
+        margin-bottom: 0.2rem;
+    }
+    .searchBTNContainer{
+        margin-bottom: 0.2rem;
+    }
+    .toggleSwitchNav {
+        display: none;
+    }
+    .menuIcon{
+        display: block;
+    }
+    .logoIcon{
+        display: none;
+    }
 }

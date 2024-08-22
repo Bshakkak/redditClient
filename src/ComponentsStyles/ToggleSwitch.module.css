@@ -1,0 +1,43 @@
+.toggleBTN{
+    background-color: #b7b9ba;
+    border: 1px solid #aaa;
+    border-radius: 99px;
+    width: 4rem;
+    height: 1.8rem;
+    transition: background-color 0.1s ease, border-color 0.2s ease;
+    cursor: pointer;
+    /* box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.748); */
+    position: relative;
+}
+
+.toggleBTN .thumb{
+    height: 1.4rem;
+    width: 1.4rem;
+    background-color: #fff;
+    border-radius: 99px;
+    transform: translateX(0);
+    transition: left 0.15s ease;
+    position: absolute;
+    left: 3px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.toggleBTN.toggled{
+    background-color: #15b58e;
+
+}
+
+.toggleBTN:hover{
+    border-color: #6f6f6f;
+}
+
+.toggleBTN.toggled .thumb{
+    left: calc(4rem - 1.7rem);
+}
+
+.modeIcon{
+    height: 96%;
+    width: 96%;
+    object-fit: contain;
+}

@@ -1,8 +1,11 @@
+import styles from '../ComponentsStyles/Homepage.module.css';
 
 function Homepage(props){
     return(
         <>
-            <h1>Homepage</h1>
+            <section className={styles.homepageContainer}>
+                <h1>Homepage</h1>
+            </section>
         </>
     );
 };
