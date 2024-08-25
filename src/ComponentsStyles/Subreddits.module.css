@@ -8,6 +8,15 @@
     cursor: default;
 }
 
+.subRedditsContainerActive{
+    position: relative;
+    width: 20rem;
+    margin: 1.5rem;
+    box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.748);
+    padding-bottom: 0.8rem;
+    cursor: default;
+}
+
 .cancelNav{
     position: fixed;
     top: 0; left: 0;
@@ -32,4 +41,23 @@
     font-weight: 800;
     margin: 1.2rem 1.8rem;
     color: #5f5f5f
+}
+
+.subRedditsContainerActive h2{
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin: 1.2rem 1.8rem;
+    color: #5f5f5f
+}
+
+@media only screen and (max-width: 769px){
+    .subRedditsContainer{
+        left: 0%;
+        transform: translateX(-115%);
+        transition: transform 0.7s ease-in-out;
+    }
+    .subRedditsContainerActive{
+        transform: translateX(0);
+        transition: transform 0.7s ease-in-out;
+    }
 }

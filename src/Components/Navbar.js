@@ -4,7 +4,7 @@ import ToggleSwitch from './ToggleSwitch';
 import { useState, useEffect } from 'react';
 import { menuIcon, closeIcon, leftArrow } from '../Icons';
 
-function Navbar(){
+function Navbar({activeSide = f => f}){
     const [menuToggle, setMenuToggle] = useState(false);
     const [mode, setMode] = useState(false);
     const [miniSearch, setMiniSearch] = useState(false);
@@ -17,7 +17,9 @@ function Navbar(){
     useEffect(()=>{
         const handleResize = () =>{
             if(window.innerWidth > 769){
-                setMiniSearch(false)
+                setMiniSearch(false);
+                setMenuToggle(false);
+                activeSide(false);
             }
         };
         window.addEventListener('resize', handleResize);
@@ -25,13 +27,17 @@ function Navbar(){
         return ()=>{
             window.removeEventListener('resize', handleResize);
         };
-    },[]);
+    },[activeSide]);
 
     return(
         <nav className={styles.navbar}>
             <div className={styles.logoContainer} tabIndex={'1'}>
                 <img className={styles.menuIcon} src={!menuToggle? menuIcon: closeIcon} 
-                alt={!menuToggle? 'menu icon':'close icon'} onClick={()=> setMenuToggle(toggle => !toggle)}/>
+                alt={!menuToggle? 'menu icon':'close icon'} 
+                onClick={()=> {
+                    activeSide(!menuToggle);
+                    setMenuToggle(toggle => !toggle);
+                    }}/>
                 <img className={styles.logoIcon} src={redditIcon} alt='Reddit Icon'/>
                 {!miniSearch && 
                 <span className={`logoFont`}>

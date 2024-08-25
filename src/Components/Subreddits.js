@@ -13,11 +13,11 @@ const mockDate = [
     {id: '0008', name: 'SubReddit8', icon:subredditIcon, color: 'aqua'},
 ];
 
-function Subreddits(props){
+function Subreddits({activeSide}){
     const [selectedSub, setSelectedSub] = useState(null);
     return(
         <>
-            <section className={styles.subRedditsContainer}>
+            <section className={!activeSide ? styles.subRedditsContainer : styles.subRedditsContainerActive}>
                 {selectedSub && 
                 <>
                     <div  className={styles.cancelNav} tabIndex={'-1'} onClick={()=>setSelectedSub(null)}/>
@@ -27,7 +27,7 @@ function Subreddits(props){
                 <h2>Subreddits</h2>
                 <ul>
                     {mockDate.map(item => 
-                        <SubEntery id={item.id} name={item.name} icon={item.icon} color={item.color}
+                        <SubEntery key={item.id} id={item.id} name={item.name} icon={item.icon} color={item.color}
                         focus={selectedSub === item.id} setFocus={setSelectedSub}/>
                     )}
                 </ul>

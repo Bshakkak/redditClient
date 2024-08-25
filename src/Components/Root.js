@@ -1,11 +1,11 @@
 import Navbar from "./Navbar";
 import { Outlet } from "react-router-dom";
 
-function Root(props){
+function Root({activeSide = f => f}){
     
     return(
         <>
-            <Navbar />
+            <Navbar activeSide={activeSide}/>
             <Outlet />
         </>
     );
