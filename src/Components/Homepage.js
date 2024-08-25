@@ -1,12 +1,10 @@
 import styles from '../ComponentsStyles/Homepage.module.css';
-
+import Subreddits from './Subreddits';
 function Homepage(props){
     return(
-        <>
-            <section className={styles.homepageContainer}>
-                <h1>Homepage</h1>
-            </section>
-        </>
+        <main className={styles.homepageContainer}>
+            <Subreddits />
+        </main>
     );
 };
 

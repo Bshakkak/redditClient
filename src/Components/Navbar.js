@@ -29,7 +29,7 @@ function Navbar(){
 
     return(
         <nav className={styles.navbar}>
-            <div className={styles.logoContainer}>
+            <div className={styles.logoContainer} tabIndex={'1'}>
                 <img className={styles.menuIcon} src={!menuToggle? menuIcon: closeIcon} 
                 alt={!menuToggle? 'menu icon':'close icon'} onClick={()=> setMenuToggle(toggle => !toggle)}/>
                 <img className={styles.logoIcon} src={redditIcon} alt='Reddit Icon'/>
@@ -39,7 +39,7 @@ function Navbar(){
                 Minimal</span>
                 }
             </div>
-            <div className={styles.formContainer}>
+            <div className={styles.formContainer} tabIndex={'1'}>
                 <form className={styles.formSearch} onSubmit={handleSubmit}>
                     <input className={styles.formInput} type='text' placeholder='Search'/>
                     <button className={styles.searchBTNContainer} type='submit'>

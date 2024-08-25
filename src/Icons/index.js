@@ -6,6 +6,8 @@ import menuIcon from './menu-icon.svg';
 import closeIcon from './close-icon.svg';
 import cancelIcon from './cancel-icon.svg';
 import leftArrow from './left-arrow.svg';
+import subredditIcon from './subreddit-icon.svg';
+
 export{
     redditIcon,
     searchIcon,
@@ -14,5 +16,6 @@ export{
     menuIcon,
     closeIcon,
     cancelIcon,
-    leftArrow
+    leftArrow,
+    subredditIcon
 };
