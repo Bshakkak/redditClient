@@ -2,6 +2,8 @@ import styles from '../ComponentsStyles/Subreddits.module.css';
 import { subredditIcon } from '../Icons';
 import SubEntery from './SubEntery';
 import { useState } from 'react';
+import ToggleSwitch from './ToggleSwitch';
+
 const mockDate = [
     {id: '0001', name: 'SubReddit1', icon:subredditIcon, color: 'blue'},
     {id: '0002', name: 'SubReddit2', icon:subredditIcon, color: 'red'},
@@ -13,23 +15,27 @@ const mockDate = [
     {id: '0008', name: 'SubReddit8', icon:subredditIcon, color: 'aqua'},
 ];
 
-function Subreddits({activeSide}){
+function Subreddits({activeSide, mode, modeValue = f => f}){
     const [selectedSub, setSelectedSub] = useState(null);
     return(
         <>
             <section className={!activeSide ? styles.subRedditsContainer : styles.subRedditsContainerActive}>
                 {selectedSub && 
                 <>
-                    <div  className={styles.cancelNav} tabIndex={'-1'} onClick={()=>setSelectedSub(null)}/>
+                    {activeSide && <div className={styles.cancelNav} tabIndex={'-1'} onClick={()=>setSelectedSub(null)}/>}
                     <div className={styles.cancelDiv} tabIndex={'-1'} onClick={()=>setSelectedSub(null)}/>
                 </>
                }
-                <h2>Subreddits</h2>
+                <div className={styles.subHeader}>
+                    <h2>Subreddits</h2>
+                    <ToggleSwitch className={styles.toggleSwitchSide} mode={mode} setMode={modeValue}/>
+                </div>
                 <ul>
                     {mockDate.map(item => 
                         <SubEntery key={item.id} id={item.id} name={item.name} icon={item.icon} color={item.color}
                         focus={selectedSub === item.id} setFocus={setSelectedSub}/>
                     )}
+                    
                 </ul>
             </section>
         </>

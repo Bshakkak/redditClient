@@ -4,9 +4,9 @@ import ToggleSwitch from './ToggleSwitch';
 import { useState, useEffect } from 'react';
 import { menuIcon, closeIcon, leftArrow } from '../Icons';
 
-function Navbar({activeSide = f => f}){
+function Navbar({activeSide = f => f, modeValue = f => f, mode}){
     const [menuToggle, setMenuToggle] = useState(false);
-    const [mode, setMode] = useState(false);
+    // const [mode, setMode] = useState(false);
     const [miniSearch, setMiniSearch] = useState(false);
 
     const handleSubmit = (e) =>{
@@ -64,7 +64,7 @@ function Navbar({activeSide = f => f}){
                         onClick={() => setMiniSearch(prev => !prev)}/>
                     </div>                    
                 </form>
-                <ToggleSwitch className={styles.toggleSwitchNav} mode={mode} setMode={setMode}/>
+                <ToggleSwitch className={styles.toggleSwitchNav} mode={mode} setMode={modeValue}/>
             </div>  
         </nav>
     );

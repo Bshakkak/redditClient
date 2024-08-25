@@ -6,7 +6,7 @@ function ToggleSwitch(props){
     return (
         <>
             <button className={`${props.className} ${styles.toggleBTN} ${props.mode ? styles.toggled:""}`} 
-            onClick={()=> props.setMode(toggle => !toggle)}>
+            onClick={()=> props.setMode(props.mode)}>
                 <div className={styles.thumb}>
                     <img className={styles.modeIcon}
                     src={!props.mode? lightIcon: darkIcon} 

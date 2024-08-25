@@ -1,9 +1,11 @@
 import styles from '../ComponentsStyles/Homepage.module.css';
 import Subreddits from './Subreddits';
-function Homepage({activeSide}){
+import Contents from './Contents';
+function Homepage({activeSide, mode, modeValue = f => f}){
     return(
         <main className={styles.homepageContainer}>
-            <Subreddits activeSide={activeSide}/>
+            <Subreddits activeSide={activeSide} mode={mode} modeValue={modeValue}/>
+            <Contents />
         </main>
     );
 };
