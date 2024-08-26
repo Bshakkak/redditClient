@@ -7,6 +7,7 @@ import closeIcon from './close-icon.svg';
 import cancelIcon from './cancel-icon.svg';
 import leftArrow from './left-arrow.svg';
 import subredditIcon from './subreddit-icon.svg';
+import ArrowUp from './ArrowUp';
 
 export{
     redditIcon,
@@ -17,5 +18,6 @@ export{
     closeIcon,
     cancelIcon,
     leftArrow,
-    subredditIcon
+    subredditIcon,
+    ArrowUp
 };
