@@ -1,22 +1,24 @@
 
 .subRedditsContainer{
     position: relative;
-    width: 20rem;
+    width: fit-content;
     margin: 1.5rem;
     box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.748);
     padding-bottom: 0.8rem;
     cursor: default;
     z-index: 5;
+    background-color: white;
 }
 
 .subRedditsContainerActive{
     position: relative;
-    width: 20rem;
+    width: fit-content;
     margin: 1.5rem;
     box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.748);
     padding-bottom: 0.8rem;
     cursor: default;
     z-index: 5;
+    background-color: white;
 }
 
 .cancelNav{
@@ -24,7 +26,7 @@
     top: 0; left: 0;
     height: 6rem;
     width: 100%;
-    background-color: black;
+    background-color: transparent;
     cursor: default;
     z-index: 9;
 }
@@ -67,27 +69,18 @@
     display: none;
 }
 
+
 @media only screen and (max-width: 769px){
     .subRedditsContainer{
-        /* display: none;
         left: 0%;
         transform: translateX(-115%);
         transition: transform 0.7s ease-in-out;
-        z-index: 5; */
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.5s ease-in-out;
         z-index: 5;
-        width: 0; height: 0;
-        margin: 0; padding: 0;
+        
     }
     .subRedditsContainerActive{
-        /* transform: translateX(0);
+        transform: translateX(0);
         transition: transform 0.7s ease-in-out;
-        z-index: 5; */
-        opacity: 1;
-        visibility: visible;
-        transition: opacity 0.5s ease-in-out;
         z-index: 5;
     }
     .cancelNav{

@@ -1,0 +1,11 @@
+
+
+.postContainer{
+    width: fit-content;
+    background-color: white;
+    box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.748);
+}
+
+.postImage{
+    width: 60%;
+}
