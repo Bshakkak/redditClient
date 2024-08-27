@@ -1,6 +1,7 @@
 import styles from '../ComponentsStyles/Comments.module.css';
 import { subredditIcon } from '../Icons';
 import { useState, useEffect } from 'react';
+import Comment from './Comment';
 const mockData = [
     {id: 'c0001', icon: subredditIcon, name: 'user_reddit_1', time: 8, comment: 'this is a comment on a post'},
     {id: 'c0002', icon: subredditIcon, name: 'user_reddit_2', time: 8, comment: 'this is a comment on a post'},
@@ -19,23 +20,14 @@ function Comments(props){
             clearTimeout(timeLoad)
         }
     },[]);
-
     return(
         <div className={styles.commentsContainer}>
-            {mockData.map(item => (
-                <div key={item.id} className={styles.singleComment}>
-                    <div className={styles.singleUpper}>
-                        <div>
-                            <img src={item.icon} alt={item.name}/>
-                            <span>{item.name}</span>
-                        </div>
-                        <span className={styles.timeComment}>{item.time} hours ago</span>
-                    </div>
-                    <div className={styles.singleLower}>
-                        {item.comment}
-                    </div>
-                </div>
-            ))}
+            {mockLoad ? 
+            <>{mockData.slice(0,4).map(item => <Comment />)}
+            </>: 
+            <>{mockData.map(item => (
+                <Comment {...item}/>
+            ))}</>}
         </div>
     );
 };

@@ -36,8 +36,10 @@
 }
 
 .singleUpper img{
-    width: 1rem;
-    height: 1rem;
+    border: 0.2rem solid green;
+    border-radius: 100%;
+    width: 1.8rem;
+    height: 1.8rem;
     margin-right: 0.6rem;
 }
 
@@ -48,4 +50,7 @@
 
 .singleLower{
     width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
 }
