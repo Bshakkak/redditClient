@@ -2,6 +2,7 @@ import styles from '../ComponentsStyles/Comments.module.css';
 import { subredditIcon } from '../Icons';
 import { useState, useEffect } from 'react';
 import Comment from './Comment';
+import LoadComment from './LoadComment';
 const mockData = [
     {id: 'c0001', icon: subredditIcon, name: 'user_reddit_1', time: 8, comment: 'this is a comment on a post'},
     {id: 'c0002', icon: subredditIcon, name: 'user_reddit_2', time: 8, comment: 'this is a comment on a post'},
@@ -23,11 +24,13 @@ function Comments(props){
     return(
         <div className={styles.commentsContainer}>
             {mockLoad ? 
-            <>{mockData.slice(0,4).map(item => <Comment />)}
+            <>
+                <LoadComment />
             </>: 
             <>{mockData.map(item => (
                 <Comment {...item}/>
-            ))}</>}
+            ))};
+            </>}
         </div>
     );
 };

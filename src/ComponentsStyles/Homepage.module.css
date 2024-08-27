@@ -13,7 +13,31 @@
     z-index: 4;
 }
 
+.subredditsContainer{
+    position: relative;
+    z-index: 5;
+}
+
 @media only screen and (max-width: 769px){
+    .homepageContainer{
+        position: relative;
+        margin-top: 5.5rem;
+        display: block;
+        scrollbar-width: none; /* Hide the scrollbar */
+        -ms-overflow-style: none;
+    }
+    .subredditsContainer{
+        position: fixed;
+        top: 4rem;
+        width: fit-content;
+        height: calc(100vh - 60px);
+        overflow-y: auto;
+        scrollbar-width: none; /* Hide the scrollbar */
+        -ms-overflow-style: none; /* For Internet Explorer */
+        /* margin-top: 4rem;
+        margin-bottom: 4rem; */
+        z-index: 5;
+    }
     .contentsContainer{
         position: relative;
         z-index: 4;
