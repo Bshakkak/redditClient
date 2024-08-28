@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Comment from './Comment';
 import LoadComment from './LoadComment';
 const mockData = [
-    {id: 'c0001', icon: subredditIcon, name: 'user_reddit_1', time: 8, comment: 'this is a comment on a post'},
+    {id: 'c0001', icon: subredditIcon, name: 'user_reddit_1', time: 8, comment: 'this is a comment on a post, this comment is long for testing the UI!'},
     {id: 'c0002', icon: subredditIcon, name: 'user_reddit_2', time: 8, comment: 'this is a comment on a post'},
     {id: 'c0003', icon: subredditIcon, name: 'user_reddit_3', time: 8, comment: 'this is a comment on a post'},
     {id: 'c0004', icon: subredditIcon, name: 'user_reddit_4', time: 8, comment: 'this is a comment on a post'},
@@ -29,7 +29,7 @@ function Comments(props){
             </>: 
             <>{mockData.map(item => (
                 <Comment {...item}/>
-            ))};
+            ))}
             </>}
         </div>
     );

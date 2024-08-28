@@ -1,6 +1,5 @@
 import styles from '../ComponentsStyles/Post.module.css';
-import { postExample } from '../Images';
-import { ArrowUp, commentIcon, subredditIcon } from '../Icons';
+import { ArrowUp, commentIcon } from '../Icons';
 import { useState } from 'react';
 import Comments from './Comments';
 
@@ -30,34 +29,48 @@ function Post(props){
                 <div className={styles.upperPost}>
                     <form className={styles.votesSection} onSubmit={handleSubmit}>
                         <button type='submit' className={styles.upvoteBTN} onClick={handleUpvote}>
-                            <ArrowUp width={'2.2rem'} height={'2rem'} color={arrowsColor[0]}/>
+                            {!props.hide && <ArrowUp width={'2.2rem'} height={'2rem'} color={arrowsColor[0]}/>}
                         </button>
-                        <span className={styles.votesMeter} style={{color: arrowsColor[2]}}>18.7k</span>
+                        <span className={styles.votesMeter} style={{color: arrowsColor[2]}}>{props.votes}</span>
                         <button type='submit' className={styles.downvoteBTN} onClick={handleDownvote}>
-                            <ArrowUp width={'2.2rem'} height={'2rem'} color={arrowsColor[1]} style={{transform: 'rotate(180deg)'}}/>
+                           {!props.hide && <ArrowUp width={'2.2rem'} height={'2rem'} color={arrowsColor[1]} style={{transform: 'rotate(180deg)'}}/>}
                         </button>
                     </form>
                     <div className={styles.mainPostContent}>
-                        <h2>First pic of Mussolini after an assassination attempt during a rally. The bullet grazed his nose</h2>
-                        <img src={postExample} alt='post example' className={styles.postImage}/>
+                        <h2>{props.title}</h2>
+                        {/* votes tablet*/}
+                        <div className={styles.votesSection2Container}>
+                            <form className={styles.votesSection2} onSubmit={handleSubmit}>
+                                <button type='submit' className={styles.upvoteBTN} onClick={handleUpvote}>
+                                    {!props.hide && <ArrowUp width={'1.2rem'} height={'1.2rem'} color={arrowsColor[0]}/>}
+                                </button>
+                                <span className={styles.votesMeter} style={{color: arrowsColor[2]}}>{props.votes}</span>
+                                <button type='submit' className={styles.downvoteBTN} onClick={handleDownvote}>
+                                    {!props.hide && <ArrowUp width={'1.2rem'} height={'1.2rem'} color={arrowsColor[1]} style={{transform: 'rotate(180deg)'}}/>}
+                                </button>
+                            </form>
+                        </div>
+                        
+                        {/* end votes tablet*/}
+                        <img src={props.image} alt='post example' className={styles.postImage}/>
                         <footer className={styles.creatorSection}>
                             <div className={styles.postOwner}>
-                                <img src={subredditIcon} alt='profile'/>
-                                <span>Creator</span>
+                                {!props.hide && <img src={props.profile} alt='profile'/>}
+                                <span>{props.profileName}</span>
                             </div>
                             <div className={styles.creationTime}>
-                                <span>x hours</span>
+                                <span>{props.postTime}</span>
                             </div>
                             <div className={styles.commentsHolder} onClick={() => setShowComments(prev => !prev)}
                                 style={showComments? {backgroundColor: 'rgb(170, 170, 253)'}:{}}>
-                               <img src={commentIcon} alt='comment'/>
-                               <span>777</span>
+                               {!props.hide && <img src={commentIcon} alt='comment'/>}
+                               <span>{props.commentsNumber}</span>
                             </div>
                         </footer>
                     {showComments && <Comments />}
                     </div>
                 </div>
-                
+    
             </article>
         </>
     );
