@@ -14,6 +14,10 @@ const mockDate = [
     {id: '0006', name: 'SubReddit6', icon:subredditIcon, color: 'blue'},
     {id: '0007', name: 'SubReddit7', icon:subredditIcon, color: 'red'},
     {id: '0008', name: 'SubReddit8', icon:subredditIcon, color: 'aqua'},
+    {id: '0009', name: 'SubReddit9', icon:subredditIcon, color: 'green'},
+    {id: '0010', name: 'SubReddit10', icon:subredditIcon, color: 'red'},
+    {id: '0011', name: 'SubReddit11', icon:subredditIcon, color: 'black'},
+    {id: '0012', name: 'SubReddit12', icon:subredditIcon, color: 'grey'},
 ];
 
 function Subreddits({activeSide, mode, modeValue = f => f}){
@@ -29,18 +33,19 @@ function Subreddits({activeSide, mode, modeValue = f => f}){
 
     return(
         <>
-            <section className={!activeSide ? styles.subRedditsContainer : styles.subRedditsContainerActive}>
+            <section className={!activeSide ? styles.subRedditsContainer : styles.subRedditsContainerActive} style={mode? {backgroundColor: '#5d5d5d'}:{backgroundColor: 'white'}}>
                 {selectedSub && 
                 <>
-                    {activeSide && <div className={styles.cancelNav} tabIndex={'-1'} onClick={()=>setSelectedSub(null)}/>}
-                    <div className={styles.cancelDiv} tabIndex={'-1'} onClick={()=>setSelectedSub(null)}/>
+                    {activeSide && <div style={{backgroundColor: 'transparent'}} className={styles.cancelNav} tabIndex={'-1'} onClick={()=>setSelectedSub(null)} />}
+                    <div style={{backgroundColor: 'transparent'}} className={styles.cancelDiv} tabIndex={'-1'} onClick={()=>setSelectedSub(null)}/>
                 </>
                }
-                <div className={styles.subHeader}>
-                    <h2>Subreddits</h2>
-                    <ToggleSwitch className={styles.toggleSwitchSide} mode={mode} setMode={modeValue}/>
-                </div>
-                <ul>
+                
+                <ul className={styles.listContainer}>
+                    <div className={styles.subHeader}>
+                        <h2 style={mode? {color: 'white'}:{color: '#5f5f5f'}}>Subreddits</h2>
+                        <ToggleSwitch className={styles.toggleSwitchSide} mode={mode} setMode={modeValue}/>
+                    </div>
                     {isLoading && 
                     <>
                         <LoadSubEntery />
@@ -50,7 +55,7 @@ function Subreddits({activeSide, mode, modeValue = f => f}){
                     </>}
                     {!isLoading && mockDate.map(item => 
                         <SubEntery key={item.id} id={item.id} name={item.name} icon={item.icon} color={item.color}
-                        focus={selectedSub === item.id} setFocus={setSelectedSub}/>
+                        focus={selectedSub === item.id} setFocus={setSelectedSub} mode={mode}/>
                     )}
                 </ul>
             </section>

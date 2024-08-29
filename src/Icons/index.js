@@ -11,7 +11,6 @@ import commentIcon from './comment-icon.svg';
 import ArrowUp from './ArrowUp';
 
 
-
 export{
     redditIcon,
     searchIcon,
@@ -23,5 +22,5 @@ export{
     leftArrow,
     subredditIcon,
     ArrowUp,
-    commentIcon
+    commentIcon,
 };

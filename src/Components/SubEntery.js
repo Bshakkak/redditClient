@@ -7,7 +7,7 @@ function SubEntery(props){
             <div className={styles.subIcon} style={{border: `4px solid ${props.color}`}}>
                 <img src={props.icon} alt={props.name} className={styles.subIconImage}/>
             </div>
-            <span>{props.name}</span>
+            <span style={props.mode? {color: 'white'}:{color: 'black'}}>{props.name}</span>
         </li>
       </>
     );

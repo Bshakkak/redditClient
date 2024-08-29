@@ -6,7 +6,11 @@ import { useState } from 'react';
 
 function App() {
   const [activeSide, setActiveSide] = useState(false);
-  const [modeValue, setModeValue] = useState(false);
+  const [modeValue, setModeValue] = useState(()=> {
+    let mode = localStorage.getItem('rcMode');
+    return mode === 'dark' ? true : false;
+  });
+
   const router = createBrowserRouter(createRoutesFromElements(
     <Route path='/' element={<Root activeSide={active => setActiveSide(active)} 
     modeValue={mode => setModeValue(!mode)} mode={modeValue}/>}>
