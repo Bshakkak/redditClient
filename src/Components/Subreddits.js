@@ -1,7 +1,8 @@
 import styles from '../ComponentsStyles/Subreddits.module.css';
 import { subredditIcon } from '../Icons';
 import SubEntery from './SubEntery';
-import { useState } from 'react';
+import LoadSubEntery from './LoadSubEntery';
+import { useState, useEffect } from 'react';
 import ToggleSwitch from './ToggleSwitch';
 
 const mockDate = [
@@ -17,6 +18,15 @@ const mockDate = [
 
 function Subreddits({activeSide, mode, modeValue = f => f}){
     const [selectedSub, setSelectedSub] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+    
+    useEffect(()=>{
+        const timeout = setTimeout(()=> setIsLoading(false), 3000);
+        return () =>{
+            clearTimeout(timeout)
+        }
+    }, []);
+
     return(
         <>
             <section className={!activeSide ? styles.subRedditsContainer : styles.subRedditsContainerActive}>
@@ -31,11 +41,17 @@ function Subreddits({activeSide, mode, modeValue = f => f}){
                     <ToggleSwitch className={styles.toggleSwitchSide} mode={mode} setMode={modeValue}/>
                 </div>
                 <ul>
-                    {mockDate.map(item => 
+                    {isLoading && 
+                    <>
+                        <LoadSubEntery />
+                        <LoadSubEntery />
+                        <LoadSubEntery />
+                        <LoadSubEntery />
+                    </>}
+                    {!isLoading && mockDate.map(item => 
                         <SubEntery key={item.id} id={item.id} name={item.name} icon={item.icon} color={item.color}
                         focus={selectedSub === item.id} setFocus={setSelectedSub}/>
                     )}
-                    
                 </ul>
             </section>
         </>
