@@ -8,6 +8,7 @@
     cursor: default;
     z-index: 5;
     background-color: white;
+    border-bottom: 1px solid black;
 }
 
 .subRedditsContainerActive{
@@ -19,6 +20,7 @@
     cursor: default;
     z-index: 5;
     background-color: white;
+    border-bottom: 1px solid black;
 }
 
 .cancelNav{
@@ -77,7 +79,6 @@
         transform: translateX(-115%);
         transition: transform 0.7s ease-in-out;
         z-index: 5;
-        
     }
     .subRedditsContainerActive{
         transform: translateX(0);
