@@ -24,8 +24,8 @@
 }
 
 .toggleBTN.toggled{
-    background-color: #15b58e;
-
+    /* background-color: #15b58e; */
+    background-color: rgb(107, 180, 248);
 }
 
 .toggleBTN:hover{

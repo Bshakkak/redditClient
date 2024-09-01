@@ -28,7 +28,7 @@ function Comments(props){
                 <LoadComment />
             </>: 
             <>{mockData.map(item => (
-                <Comment {...item}/>
+                <Comment {...item} mode={props.mode}/>
             ))}
             </>}
         </div>

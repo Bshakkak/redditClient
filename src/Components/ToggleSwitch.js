@@ -9,7 +9,7 @@ function ToggleSwitch(props){
             onClick={()=> {props.setMode(props.mode); 
             props.mode? localStorage.setItem("rcMode", "light") : localStorage.setItem("rcMode", "dark")}}>
                 <div className={styles.thumb}>
-                    <img className={styles.modeIcon}
+                    <img className={styles.modeIcon} 
                     src={!props.mode? lightIcon: darkIcon} 
                     alt={!props.mode? 'light mode':'dark mode'}/>
                 </div>

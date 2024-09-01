@@ -15,11 +15,25 @@
     background-color: whitesmoke;
 }
 
+.singleCommentDark{
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(129, 129, 129);
+}
+
+
 .singleComment:hover{
     box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.748);
 }
+.singleCommentDark:hover{
+    box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.748);
+}
 
-.singleUpper{
+.singleUpper, .singleUpperDark {
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -27,14 +41,21 @@
     font-size: 0.9rem;
     margin-bottom: 1rem;
 }
-
+.singleUpperDark{
+    color: white
+}
 .singleUpper div{
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-
+.singleUpperDark div{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .singleUpper img{
     border: 0.2rem solid green;
     border-radius: 100%;
@@ -42,21 +63,36 @@
     height: 1.8rem;
     margin-right: 0.6rem;
 }
+.singleUpperDark img{
+    border: 0.2rem solid green;
+    border-radius: 100%;
+    width: 1.8rem;
+    height: 1.8rem;
+    margin-right: 0.6rem; 
+}
 
 .timeComment{
     color: #3f3f3f;
     font-style: italic;
 }
 
-.singleLower{
+.timeCommentDark{
+    color: #fffdfd;
+    font-style: italic;
+}
+
+.singleLower, .singleLowerDark{
     width: 100%;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     line-height: 1.4;
 }
+.singleLowerDark{
+    color: white;
+}
 
-@media only screen and (min-width: 481px) and (max-width: 769px){
+@media only screen and (max-width: 769px){
     .commentsContainer{
         padding: 1.5% 3%;
     }

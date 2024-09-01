@@ -9,12 +9,30 @@
     padding: 0.9rem;
 }
 
+.postContainerDark{
+    width: fit-content;
+    height: fit-content;
+    background-color: #5d5d5d;
+    box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.748);
+    margin-bottom: 1.4rem;
+    padding: 0.9rem;
+}
+
 .postContainer h2{
     text-align: justify;
     padding: 1rem 0.6rem;
     font-size: 1rem;
     line-height: 1.4;
     font-weight: 800;
+}
+
+.postContainerDark h2{
+    text-align: justify;
+    padding: 1rem 0.6rem;
+    font-size: 1rem;
+    line-height: 1.4;
+    font-weight: 800;
+    color: white;
 }
 
 .upperPost{
@@ -56,7 +74,7 @@
     border-radius: 0.2rem;
 }
 
-.upvoteBTN{
+.upvoteBTN, .upvoteBTNDark{
     width: fit-content;
     height: fit-content;
     display: flex;
@@ -72,8 +90,11 @@
 .upvoteBTN:hover{
     background-color: rgb(181, 255, 181);
 }
+.upvoteBTNDark:hover{
+    background-color: rgb(110, 250, 110); 
+}
 
-.downvoteBTN{
+.downvoteBTN, .downvoteBTNDark{
     width: fit-content;
     height: fit-content;
     display: flex;
@@ -90,6 +111,10 @@
     background-color: rgb(255, 189, 189);
 }
 
+.downvoteBTNDark:hover{
+    background-color: rgb(255, 99, 99);
+}
+
 .creatorSection{
     width: 100%;
     display: flex;
@@ -98,7 +123,7 @@
     padding: 1.5% 5%;
 }
 
-.postOwner, .creationTime, .commentsHolder{
+.postOwner, .creationTime, .commentsHolder, .postOwnerDark, .creationTimeDark, .commentsHolderDark{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -109,30 +134,59 @@
     height: 1rem;
     margin-right: 0.4rem;
 }
+.postOwnerDark img{
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.4rem;
+}
 .postOwner span{
     font-size: 0.8rem;
     color: blue;
     font-weight: 800;
+}
+.postOwnerDark span {
+    font-size: 0.8rem;
+    color: rgb(213, 213, 255);
+    font-weight: 800; 
 }
 .creationTime{
     font-size: 0.8rem;
     color: #1f1f1f;
     font-weight: 800;
 }
-.commentsHolder{
+
+.creationTimeDark{
+    font-size: 0.8rem;
+    color: #f0f0f0;
+    font-weight: 800;
+}
+
+.commentsHolder, .commentsHolderDark{
     cursor: pointer;
     padding: 0.6rem;
     border-radius: 0.5rem;
 }
+.commentsHolderDark:hover{
+    background-color: #a7a5a5;
+}
+
 .commentsHolder:hover{
     background-color: #cfcfcf;
 }
 .commentsHolder:active{
     background-color: rgb(170, 170, 253);
 }
+.commentsHolderDark:active{
+    background-color: rgb(102, 102, 128);;
+}
 .commentsHolder img{
     width: 1rem;
     height: 1rem;
+}
+.commentsHolderDark img{
+    width: 1rem;
+    height: 1rem;
+    filter: invert(100%);
 }
 .commentsHolder span{
     font-size: 1rem;
@@ -140,6 +194,13 @@
     font-weight: 800;
     margin-left: 0.4rem;
 }
+.commentsHolderDark span{
+    font-size: 1rem;
+    color: #f0f0f0;
+    font-weight: 800;
+    margin-left: 0.4rem;
+}
+
 .votesSection2{
     display: none;
 }
@@ -151,6 +212,13 @@
         font-size: 1rem;
         line-height: 1.4;
         font-weight: 800;
+    }
+    .postContainerDark h2{
+        text-align: left;
+        padding: 0.125rem;
+        font-size: 1rem;
+        line-height: 1.4;
+        font-weight: 800; 
     }
     .votesSection{
         display: none;
@@ -179,6 +247,13 @@
 
 @media only screen and (max-width: 481px){
     .postContainer h2{
+        text-align: left;
+        padding: 0.125rem;
+        font-size: 1rem;
+        line-height: 1.4;
+        font-weight: 800;
+    }
+    .postContainerDark h2{
         text-align: left;
         padding: 0.125rem;
         font-size: 1rem;

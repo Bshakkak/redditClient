@@ -1,16 +1,16 @@
 import styles from '../ComponentsStyles/Comments.module.css';
 
-function Comment({id, icon, name, time, comment}){
+function Comment({id, icon, name, time, comment, mode}){
     return(
-        <div key={id} className={styles.singleComment}>
-            <div className={styles.singleUpper}>
+        <div key={id} className={!mode ? styles.singleComment : styles.singleCommentDark}>
+            <div className={!mode ? styles.singleUpper : styles.singleUpperDark}>
                 <div>
                     <img src={icon} alt={name}/>
                     <span>{name}</span>
                 </div>
-                <span className={styles.timeComment}>{time} hours ago</span>
+                <span className={!mode ? styles.timeComment : styles.timeCommentDark}>{time} hours ago</span>
             </div>
-                <div className={styles.singleLower}>
+                <div className={!mode ? styles.singleLower : styles.singleLowerDark}>
                     {comment}
                 </div>
         </div>

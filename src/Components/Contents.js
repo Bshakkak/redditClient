@@ -60,8 +60,8 @@ function Contents(props){
 
     return(
         <section className={styles.contentsContainer}>
-            {isLoading && <LoadPost />}
-            {!isLoading && mockData.map(post => <Post key={post.id} {...post} hide={false}/>)}
+            {isLoading && <LoadPost mode={props.mode}/>}
+            {!isLoading && mockData.map(post => <Post key={post.id} {...post} hide={false} mode={props.mode}/>)}
         </section>
     );
 };

@@ -27,7 +27,7 @@ function Homepage({activeSide, mode, modeValue = f => f}){
                 <Subreddits activeSide={activeSide} mode={mode} modeValue={modeValue}/>
             </div>
             {!contentScreen && <div className={styles.contentsContainer}>
-                <Contents />
+                <Contents mode={mode}/>
             </div>}
         </main>
     );
