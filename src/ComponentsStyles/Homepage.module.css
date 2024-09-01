@@ -13,7 +13,7 @@
     z-index: 4;
 }
 
-.subredditsContainer{
+.subredditsContainer, .subredditsContainerActive{
     position: relative;
     z-index: 5;
 }
@@ -34,11 +34,23 @@
         height: 100vh;
         overflow-x: hidden;
         overflow-y: hidden;
+        transform: translateX(-115%);
+        transition: transform 0.7s ease-in-out;
         /* scrollbar-width: none;  /* Hide the scrollbar */
         /* -ms-overflow-style: none; /* For Internet Explorer */
         /* margin-top: 4rem;
         margin-bottom: 4rem; */
         z-index: 5;
+    }
+    .subredditsContainerActive{
+        position: fixed;
+        top: 4rem;
+        width: fit-content;
+        height: 100vh;
+        overflow-x: hidden;
+        overflow-y: hidden;
+        transform: translateX(0);
+        transition: transform 0.7s ease-in-out;
     }
     .contentsContainer{
         position: relative;

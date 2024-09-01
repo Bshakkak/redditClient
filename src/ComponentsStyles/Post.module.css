@@ -91,7 +91,7 @@
     background-color: rgb(181, 255, 181);
 }
 .upvoteBTNDark:hover{
-    background-color: rgb(110, 250, 110); 
+    background-color: rgb(47, 87, 47); 
 }
 
 .downvoteBTN, .downvoteBTNDark{
@@ -112,7 +112,7 @@
 }
 
 .downvoteBTNDark:hover{
-    background-color: rgb(255, 99, 99);
+    background-color: rgb(110, 47, 47);
 }
 
 .creatorSection{
@@ -282,5 +282,15 @@
     }
     .postImage{
         width: 100%;
+    }
+    .postOwner img{
+        display: none;
+    }
+    .postOwnerDark img{
+        display: none;
+    }
+    .commentsHolder, .commentsHolderDark{
+        padding: 0.4rem;
+        border-radius: 0.5rem;
     }
 }

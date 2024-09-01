@@ -92,8 +92,18 @@
     color: white;
 }
 
-@media only screen and (max-width: 769px){
+@media only screen and (min-width: 481px) and (max-width: 769px){
     .commentsContainer{
         padding: 1.5% 3%;
+    }
+}
+@media only screen and (max-width: 481px){
+    .singleUpper, .singleUpperDark{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .timeComment, .timeCommentDark{
+        margin-top: 0.6rem;
+        margin-bottom: -0.4rem;
     }
 }

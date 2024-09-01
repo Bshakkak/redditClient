@@ -23,7 +23,7 @@ function Homepage({activeSide, mode, modeValue = f => f}){
             {contentScreen && <div className={styles.contentsContainer}>
                 <Contents mode={mode}/>
             </div>}
-            <div className={styles.subredditsContainer}>
+            <div className={!activeSide ? styles.subredditsContainer : styles.subredditsContainerActive}>
                 <Subreddits activeSide={activeSide} mode={mode} modeValue={modeValue}/>
             </div>
             {!contentScreen && <div className={styles.contentsContainer}>
