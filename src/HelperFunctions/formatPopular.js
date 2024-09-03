@@ -1,16 +1,16 @@
 import { subredditIcon } from "../Icons";
 
 const formatPopular = (data) =>{
-    let result = {};
+    let result = [];
     data.data.children.forEach(item => {
-        result[item.data.title] = {
+        let entery = {
             id: item.data.id,
             name: item.data.title,
             icon: item.data.icon_img ? item.data.icon_img : subredditIcon,
             color: item.data.primary_color ? item.data.primary_color : 'blue',
-            fetchURL: `https://www.reddit.com${item.data.url}.json`,
-            content: []
+            fetchURL: `https://www.reddit.com${item.data.url}.json`
         }
+        result.push(entery);
     });
     return result;
 };

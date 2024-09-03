@@ -2,10 +2,10 @@ import { subredditIcon } from "../Icons";
 
 const fetchAuthorIcon = async (author) =>{
     try{
-        const response = await fetch(`https://www.reddit.com/u/${author}/about.json`);
+        const response = await fetch(`https://www.reddit.com/user/${author}/about.json`);
         if(response.ok){
             let result = response.json();
-            return result.data.icon_img;
+            return result.data.snoovatar_img ? result.data.snoovatar_img : subredditIcon
         }else{
             return subredditIcon;
         }

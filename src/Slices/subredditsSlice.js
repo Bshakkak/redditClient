@@ -2,13 +2,13 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import formatResponseContent from "../HelperFunctions/formatResponseContent";
 import formatPopular from "../HelperFunctions/formatPopular";
 
-const fetchData = createAsyncThunk('subreddits/fetchData', async (url)=>{
+export const fetchData = createAsyncThunk('subreddits/fetchData', async (url)=>{
     const response = await fetch(url);
     const data = await response.json()
     return data;
 });
 
-const fetchPopular = createAsyncThunk('subreddits/fetchPopular', async ()=>{
+export const fetchPopular = createAsyncThunk('subreddits/fetchPopular', async ()=>{
     const response = await fetch('https://www.reddit.com/subreddits/popular.json?limit=8');
     const data = await response.json();
     return data;
@@ -17,8 +17,8 @@ const fetchPopular = createAsyncThunk('subreddits/fetchPopular', async ()=>{
 export const subredditsSlice = createSlice({
     name: 'subreddits',
     initialState: {
-        home: [],
-        popular:{},
+        content: [],
+        popular: [],
         loading: false,
         error: false
     },
@@ -37,17 +37,18 @@ export const subredditsSlice = createSlice({
             state.error = false;
         },
         [fetchData.fulfilled]: async (state, action) =>{
+            state.content = await formatResponseContent(action.payload);
             state.loading = false;
             state.error = false;
-            if(action.meta.arg === 'https://www.reddit.com/.json'){
-                state.home = await formatResponseContent(action.payload);
-            }else{
-                for(let sub in state.popular){
-                    if(sub.fetchURL === action.meta.arg){
-                        state.popular[sub]['content'] = await formatResponseContent(action.payload)
-                    }
-                }
-            }
+            // if(action.meta.arg === 'https://www.reddit.com/.json'){
+            //     state.home = await formatResponseContent(action.payload);
+            // }else{
+            //     for(let sub in state.popular){
+            //         if(sub.fetchURL === action.meta.arg){
+            //             state.popular[sub]['content'] = await formatResponseContent(action.payload)
+            //         }
+            //     }
+            // }
         },
         [fetchData.rejected]: (state, action) =>{
             state.loading = false;
@@ -56,9 +57,9 @@ export const subredditsSlice = createSlice({
     }
 });
 
-export const selectHome = (state) => state.home;
-export const selectPopular = (state) => state.popular;
-export const isLoading = (state) => state.loading;
-export const isError = state => state.errot;
+export const selectContent = (state) => state.subreddits.content;
+export const selectPopular = (state) => state.subreddits.popular;
+export const isLoading = (state) => state.subreddits.loading;
+export const isError = (state) => state.subreddits.error;
 
 export default subredditsSlice.reducer;

@@ -4,6 +4,8 @@ import SubEntery from './SubEntery';
 import LoadSubEntery from './LoadSubEntery';
 import { useState, useEffect } from 'react';
 import ToggleSwitch from './ToggleSwitch';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectPopular, isLoading, isError, fetchPopular } from '../Slices/subredditsSlice';
 
 const mockDate = [
     {id: '0001', name: 'SubReddit1', icon:subredditIcon, color: 'blue'},
@@ -22,14 +24,14 @@ const mockDate = [
 
 function Subreddits({activeSide, mode, modeValue = f => f}){
     const [selectedSub, setSelectedSub] = useState(null);
-    const [isLoading, setIsLoading] = useState(true);
-    
+    const loading = useSelector(isLoading);
+    const error = useSelector(isError);
+    const popular = useSelector(selectPopular);
+
+    const dispatch = useDispatch();
     useEffect(()=>{
-        const timeout = setTimeout(()=> setIsLoading(false), 3000);
-        return () =>{
-            clearTimeout(timeout)
-        }
-    }, []);
+        dispatch(fetchPopular());
+    }, [dispatch]);
 
     return(
         <>
@@ -46,16 +48,16 @@ function Subreddits({activeSide, mode, modeValue = f => f}){
                         <h2 style={mode? {color: 'white'}:{color: '#5f5f5f'}}>Subreddits</h2>
                         <ToggleSwitch className={styles.toggleSwitchSide} mode={mode} setMode={modeValue}/>
                     </div>
-                    {isLoading && 
+                    {loading && 
                     <>
                         <LoadSubEntery />
                         <LoadSubEntery />
                         <LoadSubEntery />
                         <LoadSubEntery />
                     </>}
-                    {!isLoading && mockDate.map(item => 
+                    {!loading && popular.map(item => 
                         <SubEntery key={item.id} id={item.id} name={item.name} icon={item.icon} color={item.color}
-                        focus={selectedSub === item.id} setFocus={setSelectedSub} mode={mode}/>
+                        focus={selectedSub === item.id} setFocus={setSelectedSub} fetchURL={item.fetchURL} mode={mode}/>
                     )}
                 </ul>
             </section>
