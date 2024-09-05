@@ -1,10 +1,13 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import formatResponseContent from "../HelperFunctions/formatResponseContent";
+import {formatResponseContent, fetchAuthorIcon } from '../HelperFunctions/formatResponseContent'
 import formatPopular from "../HelperFunctions/formatPopular";
 
 export const fetchData = createAsyncThunk('subreddits/fetchData', async (url)=>{
     const response = await fetch(url);
-    const data = await response.json()
+    let data = await response.json();
+    data = formatResponseContent(data);
+    let profile = await fetchAuthorIcon(data.profileName);
+    data.profile = profile;
     return data;
 });
 
@@ -36,8 +39,8 @@ export const subredditsSlice = createSlice({
             state.loading = true;
             state.error = false;
         },
-        [fetchData.fulfilled]: async (state, action) =>{
-            state.content = await formatResponseContent(action.payload);
+        [fetchData.fulfilled]: (state, action) =>{
+            state.content = action.payload;
             state.loading = false;
             state.error = false;
             // if(action.meta.arg === 'https://www.reddit.com/.json'){

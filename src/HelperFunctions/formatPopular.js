@@ -1,7 +1,13 @@
-import { subredditIcon } from "../Icons";
+import { subredditIcon, homeIcon } from "../Icons";
 
 const formatPopular = (data) =>{
-    let result = [];
+    let result = [{
+        id: 'home-reddit',
+        name: 'Feed',
+        icon: homeIcon,
+        color: 'transparent',
+        fetchURL: "https://www.reddit.com/.json"
+    }];
     data.data.children.forEach(item => {
         let entery = {
             id: item.data.id,

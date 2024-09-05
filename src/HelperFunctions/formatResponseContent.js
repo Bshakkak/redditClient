@@ -1,6 +1,6 @@
 import { subredditIcon } from "../Icons";
 
-const fetchAuthorIcon = async (author) =>{
+export const fetchAuthorIcon = async (author) =>{
     try{
         const response = await fetch(`https://www.reddit.com/user/${author}/about.json`);
         if(response.ok){
@@ -35,18 +35,16 @@ function formatTimestamp(timestamp) {
     }
   }
   
-const formatResponseContent = async (data) =>{
-    let responses = await data.data.children.map(async item => ({
+export const formatResponseContent = (data) =>{
+    let responses = data.data.children.map(async item => ({
         id: item.data.id,
         votes: item.data.score,
         title: item.data.title,
         image: item.data.url_overridden_by_dest,
-        profile: await fetchAuthorIcon(item.data.author),
+        // profile: subredditIcon await fetchAuthorIcon(item.data.author),
         profileName: item.data.author,
         postTime: formatTimestamp(Number(item.data.created_utc)),
         commentsNumber: item.data.num_comments,
     }));
     return responses;
 };
-
-export default formatResponseContent;
