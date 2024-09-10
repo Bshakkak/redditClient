@@ -1,4 +1,5 @@
 import { subredditIcon } from "../Icons";
+import { placeHolder } from "../Images";
 
 export const fetchAuthorIcon = async (author) =>{
     try{
@@ -14,7 +15,7 @@ export const fetchAuthorIcon = async (author) =>{
     }
 }
 
-function formatTimestamp(timestamp) {
+export function formatTimestamp(timestamp) {
     const now = new Date();
     const timestampDate = new Date(timestamp * 1000); // Convert Unix timestamp to milliseconds
   
@@ -36,15 +37,23 @@ function formatTimestamp(timestamp) {
   }
   
 export const formatResponseContent = (data) =>{
-    let responses = data.data.children.map(async item => ({
+    let responses = data.data.children.map(item => ({
         id: item.data.id,
         votes: item.data.score,
         title: item.data.title,
         image: item.data.url_overridden_by_dest,
-        // profile: subredditIcon await fetchAuthorIcon(item.data.author),
+        profile: subredditIcon, //await fetchAuthorIcon(item.data.author),
         profileName: item.data.author,
         postTime: formatTimestamp(Number(item.data.created_utc)),
-        commentsNumber: item.data.num_comments,
+        commentsNumber: Number(item.data.num_comments),
+        media: item.data.media ? item.data.media.reddit_video.fallback_url : null,
+        isVideo: item.data.is_video,
+        cross: item.data.crosspost_parent_list ? true : false,
+        image_alt: item.data.crosspost_parent_list ? item.data.crosspost_parent_list[0]["url_overridden_by_dest"] : null,
+        media_alt: item.data.crosspost_parent_list ? item.data.crosspost_parent_list[0]["media"] ? item.data.crosspost_parent_list[0]["media"]["reddit_video"]["fallback_url"] : null : null,
+        isVideo_alt: item.data.crosspost_parent_list? item.data.crosspost_parent_list[0]["is_video"]: null,
+        onreddit: item.data.is_reddit_media_domain,
+        thumbnail: item.data.thumbnail ? item.data.thumbnail : null
     }));
     return responses;
 };

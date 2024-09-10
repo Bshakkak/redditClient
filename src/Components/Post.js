@@ -2,6 +2,7 @@ import styles from '../ComponentsStyles/Post.module.css';
 import { ArrowUp, commentIcon } from '../Icons';
 import { useState, useEffect } from 'react';
 import Comments from './Comments';
+import { placeHolder2 } from '../Images';
 
 function Post(props){
     const [arrowsColor, setArrowsColor] = useState(() => {
@@ -76,7 +77,32 @@ function Post(props){
                         </div>
                         
                         {/* end votes tablet*/}
-                        <img src={props.image} alt='post example' className={styles.postImage}/>
+                        {/* different urls for posts and crossposts*/}
+                        {!props.cross && <>{props.image ? 
+                        (!props.isVideo  ?
+                            <img src={props.onreddit ? props.image : props.thumbnail} alt={props.title} className={styles.postImage}/>
+                            :
+                            <video controls autoPlay className={styles.postImage}>
+                                <source src={props.media} type='video/mp4'/>
+                            </video>)
+                        :
+                        <div style={{width: '100%'}}>
+                            <img src={placeHolder2} alt='' className={styles.postImage} style={{visibility: 'hidden'}}/>
+                        </div>
+                        }</>}
+                        {props.cross && <>{props.image_alt ? 
+                        (!props.isVideo_alt  ?
+                            <img src={props.onreddit ? props.image_alt : props.thumbnail} alt={props.title} className={styles.postImage}/>
+                            :
+                            <video controls autoPlay className={styles.postImage}>
+                                <source src={props.media_alt} type='video/mp4'/>
+                            </video>)
+                        :
+                        <div style={{width: '100%'}}>
+                            <img src={placeHolder2} alt='' className={styles.postImage} style={{visibility: 'hidden'}}/>
+                        </div>
+                        }</>}
+
                         <footer className={styles.creatorSection}>
                             <div className={!props.mode ? styles.postOwner : styles.postOwnerDark}>
                                 {!props.hide && <img src={props.profile} alt='profile'/>}

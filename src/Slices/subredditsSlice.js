@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {formatResponseContent, fetchAuthorIcon } from '../HelperFunctions/formatResponseContent'
 import formatPopular from "../HelperFunctions/formatPopular";
 
+
 export const fetchData = createAsyncThunk('subreddits/fetchData', async (url)=>{
     const response = await fetch(url);
     let data = await response.json();
@@ -43,15 +44,6 @@ export const subredditsSlice = createSlice({
             state.content = action.payload;
             state.loading = false;
             state.error = false;
-            // if(action.meta.arg === 'https://www.reddit.com/.json'){
-            //     state.home = await formatResponseContent(action.payload);
-            // }else{
-            //     for(let sub in state.popular){
-            //         if(sub.fetchURL === action.meta.arg){
-            //             state.popular[sub]['content'] = await formatResponseContent(action.payload)
-            //         }
-            //     }
-            // }
         },
         [fetchData.rejected]: (state, action) =>{
             state.loading = false;

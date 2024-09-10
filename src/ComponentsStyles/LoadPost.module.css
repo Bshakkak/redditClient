@@ -1,23 +1,26 @@
 .loadPostContainer, .loadPostContainerDark{
-    padding: 1.5rem;
-    margin-bottom: 0.5rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: white;
-    box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.748);
+  width: 100%;
+  height: fit-content;  
+  padding: 1.5rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.748);
 }
 .loadPostContainerDark{
   background-color: #5d5d5d;
 }
 
 .loadBuffer{
+    width: 100%;
+    height: fit-content;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    
     background-color: whitesmoke;
     animation: shimmer 1.5s infinite;
 }
@@ -35,5 +38,7 @@
   }
 
 .dummyHolder{
+    width: 100%;
+    height: fit-content;
     visibility: hidden;
 }

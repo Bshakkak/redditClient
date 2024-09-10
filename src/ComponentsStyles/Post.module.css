@@ -1,7 +1,7 @@
 
 
 .postContainer{
-    width: fit-content;
+    width: 100%;
     height: fit-content;
     background-color: white;
     box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.748);
@@ -10,7 +10,7 @@
 }
 
 .postContainerDark{
-    width: fit-content;
+    width: 100%;
     height: fit-content;
     background-color: #5d5d5d;
     box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.748);

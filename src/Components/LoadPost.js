@@ -7,7 +7,7 @@ function LoadPost({mode}){
             <div className={!mode ? styles.loadPostContainer : styles.loadPostContainerDark}>
                 <div className={styles.loadBuffer}>
                     <div className={styles.dummyHolder}>
-                        <Post image={placeHolder} hide={true}/>
+                        <Post hide={true}/>
                     </div>
                 </div>
             </div>

@@ -1,5 +1,5 @@
 import styles from '../ComponentsStyles/Subreddits.module.css';
-import { homeIcon, subredditIcon, errorIcon } from '../Icons';
+import { homeIcon, errorIcon } from '../Icons';
 import SubEntery from './SubEntery';
 import LoadSubEntery from './LoadSubEntery';
 import { useState, useEffect } from 'react';

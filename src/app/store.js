@@ -4,6 +4,6 @@ import subredditsSliceReducer from '../Slices/subredditsSlice';
 
 export const store = configureStore({
   reducer: {
-    subreddits: subredditsSliceReducer
+    subreddits: subredditsSliceReducer,
   },
 });
