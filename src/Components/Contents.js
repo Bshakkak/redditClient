@@ -5,7 +5,7 @@ import Post from './Post';
 import LoadPost from './LoadPost';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectContent, isLoading, isError, fetchData, selectPopular } from '../Slices/subredditsSlice';
+import { selectContent, isLoading, isError, fetchData } from '../Slices/subredditsSlice';
 // const mockData = [
 //     {
 //         id: 'post_1',

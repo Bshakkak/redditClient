@@ -87,7 +87,7 @@ function Post(props){
                             </video>)
                         :
                         <div style={{width: '100%'}}>
-                            <img src={placeHolder2} alt='' className={styles.postImage} style={{visibility: 'hidden'}}/>
+                           {props.hide && <img src={placeHolder2} alt='' className={styles.postImage} style={{visibility: 'hidden'}}/>}
                         </div>
                         }</>}
                         {props.cross && <>{props.image_alt ? 
@@ -99,7 +99,7 @@ function Post(props){
                             </video>)
                         :
                         <div style={{width: '100%'}}>
-                            <img src={placeHolder2} alt='' className={styles.postImage} style={{visibility: 'hidden'}}/>
+                            {props.hide && <img src={placeHolder2} alt='' className={styles.postImage} style={{visibility: 'hidden'}}/>}
                         </div>
                         }</>}
 
