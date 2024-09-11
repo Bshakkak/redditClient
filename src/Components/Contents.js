@@ -5,7 +5,7 @@ import Post from './Post';
 import LoadPost from './LoadPost';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectContent, isLoading, isError, fetchData } from '../Slices/subredditsSlice';
+import { selectContent, isLoading, isError, fetchData, selectPopular } from '../Slices/subredditsSlice';
 // const mockData = [
 //     {
 //         id: 'post_1',
@@ -52,18 +52,19 @@ import { selectContent, isLoading, isError, fetchData } from '../Slices/subreddi
 
 function Contents(props){
     const content = useSelector(selectContent);    
-    const loading = useSelector(isLoading)
-    const error = useSelector(isError)
+    const loading = useSelector(isLoading);
+    const error = useSelector(isError);
     const dispatch = useDispatch()
     
     useEffect(()=>{
-        dispatch(fetchData('https://www.reddit.com/.json'))
-    },[]);
+        dispatch(fetchData('https://www.reddit.com/.json?limit=10'));
+    },[dispatch]);
 
     return(
         <section className={styles.contentsContainer}>
+            {error && <div style={{height: '100vh'}}/>}
             {loading && <LoadPost mode={props.mode}/>}
-            {!loading && content.map((post, i) => <Post key={`${i}-${post.id}`} {...post} hide={false} mode={props.mode}/>)}
+            {!loading && !error && content.map((post, i) => <Post key={`${i}-${post.id}`} {...post} hide={false} mode={props.mode}/>)}
         </section>
     );
 };

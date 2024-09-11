@@ -1,5 +1,4 @@
 import { subredditIcon } from "../Icons";
-import { placeHolder } from "../Images";
 
 export const fetchAuthorIcon = async (author) =>{
     try{

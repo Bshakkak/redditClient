@@ -52,7 +52,7 @@ function Subreddits({activeSide, mode, modeValue = f => f}){
                }
                 
                 <ul className={styles.listContainer}>
-                    <div className={styles.subHeader}>
+                    <div key={'list-headers'} className={styles.subHeader}>
                         <h2 style={mode? {color: 'white'}:{color: '#5f5f5f'}}>Subreddits</h2>
                         <ToggleSwitch className={styles.toggleSwitchSide} mode={mode} setMode={modeValue}/>
                     </div>
@@ -63,12 +63,12 @@ function Subreddits({activeSide, mode, modeValue = f => f}){
                     </>}
                     {loading && 
                     <>
-                        <SubEntery key={'home-reddit'} id={'home-reddit'} name={'Feed'} icon={homeIcon} color={'transparent'} 
+                        <SubEntery key={'home-reddit-load'} id={'home-reddit-load'} name={'Feed'} icon={homeIcon} color={'transparent'} 
                         focus={selectedSub === 'home-reddit'} setFocus={setSelectedSub} fetchURL={"https://www.reddit.com/.json"} mode={mode}/>
                         {popular.filter(item => item.id !== 'home-reddit').map(item => <LoadSubEntery {...item}/>)}
                     </>}
-                    {!loading && !error && popular.map(item => 
-                        <SubEntery key={item.id} id={item.id} name={item.name} icon={item.icon} color={item.color}
+                    {!loading && !error && popular.map((item,i) => 
+                        <SubEntery key={`${i}-${i*i}-${item.id}`} id={`${i}-${i*i}-${item.id}`} name={item.name} icon={item.icon} color={item.color}
                         focus={selectedSub === item.id} setFocus={setSelectedSub} fetchURL={item.fetchURL} mode={mode}/>
                     )}
                 </ul>

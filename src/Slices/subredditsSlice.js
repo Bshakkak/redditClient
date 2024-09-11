@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {formatResponseContent, fetchAuthorIcon } from '../HelperFunctions/formatResponseContent'
 import formatPopular from "../HelperFunctions/formatPopular";
-
+import { homeIcon } from "../Icons";
 
 export const fetchData = createAsyncThunk('subreddits/fetchData', async (url)=>{
     const response = await fetch(url);
@@ -22,7 +22,13 @@ export const subredditsSlice = createSlice({
     name: 'subreddits',
     initialState: {
         content: [],
-        popular: [],
+        popular: [{
+            id: 'home-reddit',
+            name: 'Feed',
+            icon: homeIcon,
+            color: 'transparent',
+            fetchURL: "https://www.reddit.com/.json?limit=10"
+        }],
         loading: false,
         error: false
     },
@@ -34,16 +40,26 @@ export const subredditsSlice = createSlice({
         [fetchPopular.fulfilled]: (state, action)=>{
             state.loading = false;
             state.error = false;
-            state.popular = formatPopular(action.payload)
+            state.popular = [{
+                id: 'home-reddit',
+                name: 'Feed',
+                icon: homeIcon,
+                color: 'transparent',
+                fetchURL: "https://www.reddit.com/.json?limit=10"
+            }, ...formatPopular(action.payload)];
+        },
+        [fetchPopular.rejected]: (state, action) =>{
+            state.loading = false;
+            state.error = true;
         },
         [fetchData.pending]: (state, action) =>{
             state.loading = true;
             state.error = false;
         },
         [fetchData.fulfilled]: (state, action) =>{
-            state.content = action.payload;
             state.loading = false;
             state.error = false;
+            state.content = action.payload;
         },
         [fetchData.rejected]: (state, action) =>{
             state.loading = false;
