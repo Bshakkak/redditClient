@@ -24,6 +24,8 @@
     font-size: 1rem;
     line-height: 1.4;
     font-weight: 800;
+    cursor: pointer;
+    text-decoration: underline;
 }
 
 .postContainerDark h2{
@@ -33,6 +35,8 @@
     line-height: 1.4;
     font-weight: 800;
     color: white;
+    cursor: pointer;
+    text-decoration: underline;
 }
 
 .upperPost{
@@ -72,6 +76,14 @@
     margin: auto;
     object-fit: contain;
     border-radius: 0.2rem;
+}
+
+.postThumb{
+    width: 20%;
+    margin-left: auto;
+    margin-right: 0%;
+    object-fit: scale-down;
+    border-radius: 1rem;
 }
 
 .upvoteBTN, .upvoteBTNDark{
@@ -122,6 +134,9 @@
     align-items: center;
     padding: 1.5% 5%;
 }
+.creatorSectionMini{
+    display: none;
+}
 
 .postOwner, .creationTime, .commentsHolder, .postOwnerDark, .creationTimeDark, .commentsHolderDark{
     display: flex;
@@ -129,7 +144,19 @@
     align-items: center;
     
 }
+.postOwnerMini, .creationTimeMini, .commentsHolderMini, .postOwnerDarkMini, .creationTimeDarkMini, .commentsHolderDarkMini{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
 .postOwner img{
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.4rem;
+}
+.postOwnerMini img{
     width: 1rem;
     height: 1rem;
     margin-right: 0.4rem;
@@ -139,7 +166,17 @@
     height: 1rem;
     margin-right: 0.4rem;
 }
+.postOwnerDarkMini img{
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.4rem;
+}
 .postOwner span{
+    font-size: 0.8rem;
+    color: blue;
+    font-weight: 800;
+}
+.postOwnerMini span{
     font-size: 0.8rem;
     color: blue;
     font-weight: 800;
@@ -149,19 +186,37 @@
     color: rgb(213, 213, 255);
     font-weight: 800; 
 }
+.postOwnerDarkMini span {
+    font-size: 0.8rem;
+    color: rgb(213, 213, 255);
+    font-weight: 800; 
+}
 .creationTime{
     font-size: 0.8rem;
     color: #1f1f1f;
     font-weight: 800;
 }
-
+.creationTimeMini{
+    font-size: 0.8rem;
+    color: #1f1f1f;
+    font-weight: 800;
+}
 .creationTimeDark{
     font-size: 0.8rem;
     color: #f0f0f0;
     font-weight: 800;
 }
-
+.creationTimeDarkMini{
+    font-size: 0.8rem;
+    color: #f0f0f0;
+    font-weight: 800;
+}
 .commentsHolder, .commentsHolderDark{
+    cursor: pointer;
+    padding: 0.6rem;
+    border-radius: 0.5rem;
+}
+.commentsHolderMini, .commentsHolderDarkMini{
     cursor: pointer;
     padding: 0.6rem;
     border-radius: 0.5rem;
@@ -169,17 +224,33 @@
 .commentsHolderDark:hover{
     background-color: #a7a5a5;
 }
+.commentsHolderDarkMini:hover{
+    background-color: #a7a5a5;
+}
 
 .commentsHolder:hover{
+    background-color: #cfcfcf;
+}
+.commentsHolderMini:hover{
     background-color: #cfcfcf;
 }
 .commentsHolder:active{
     background-color: rgb(170, 170, 253);
 }
+.commentsHolderMini:active{
+    background-color: rgb(170, 170, 253);
+}
 .commentsHolderDark:active{
     background-color: rgb(102, 102, 128);;
 }
+.commentsHolderDarkMini:active{
+    background-color: rgb(102, 102, 128);;
+}
 .commentsHolder img{
+    width: 1rem;
+    height: 1rem;
+}
+.commentsHolderMini img{
     width: 1rem;
     height: 1rem;
 }
@@ -188,7 +259,18 @@
     height: 1rem;
     filter: invert(100%);
 }
+.commentsHolderDarkMini img{
+    width: 1rem;
+    height: 1rem;
+    filter: invert(100%);
+}
 .commentsHolder span{
+    font-size: 1rem;
+    color: #1f1f1f;
+    font-weight: 800;
+    margin-left: 0.4rem;
+}
+.commentsHolderMini span{
     font-size: 1rem;
     color: #1f1f1f;
     font-weight: 800;
@@ -200,7 +282,12 @@
     font-weight: 800;
     margin-left: 0.4rem;
 }
-
+.commentsHolderDarkMini span{
+    font-size: 1rem;
+    color: #f0f0f0;
+    font-weight: 800;
+    margin-left: 0.4rem;
+}
 .votesSection2{
     display: none;
 }
@@ -243,6 +330,7 @@
     .postImage{
         width: 100%;
     }
+    
 }
 
 @media only screen and (max-width: 481px){
@@ -292,5 +380,33 @@
     .commentsHolder, .commentsHolderDark{
         padding: 0.4rem;
         border-radius: 0.5rem;
+    }
+    .commentsHolderMini, .commentsHolderDarkMini{
+        padding: 0.4rem;
+        border-radius: 0.5rem;
+    }
+    .creatorSection{
+        display: none;
+    }
+    .creatorSectionMini{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 1.5% 5%;
+    }
+    .upperCreator{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 0.5rem;
+    }
+    .lowerCreator{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 }

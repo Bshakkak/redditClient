@@ -1,5 +1,4 @@
 import Post from "./Post";
-import { placeHolder } from "../Images";
 import styles from '../ComponentsStyles/LoadPost.module.css'
 function LoadPost({mode}){
     return(

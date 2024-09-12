@@ -14,6 +14,8 @@ export const fetchAuthorIcon = async (author) =>{
     }
 }
 
+const formatNumbers = num => num.toString().length > 3 ? `${num.toString().slice(0, 3)}K` : num;
+
 export function formatTimestamp(timestamp) {
     const now = new Date();
     const timestampDate = new Date(timestamp * 1000); // Convert Unix timestamp to milliseconds
@@ -38,13 +40,14 @@ export function formatTimestamp(timestamp) {
 export const formatResponseContent = (data) =>{
     let responses = data.data.children.map(item => ({
         id: item.data.id,
-        votes: item.data.score,
+        votes: formatNumbers(item.data.score),
         title: item.data.title,
+        postLink: `https://www.reddit.com${item.data.permalink}`,
         image: item.data.url_overridden_by_dest,
         profile: subredditIcon, //await fetchAuthorIcon(item.data.author),
         profileName: item.data.author,
         postTime: formatTimestamp(Number(item.data.created_utc)),
-        commentsNumber: Number(item.data.num_comments),
+        commentsNumber: formatNumbers(item.data.num_comments),
         media: item.data.media ? item.data.media.reddit_video.fallback_url : null,
         isVideo: item.data.is_video,
         cross: item.data.crosspost_parent_list ? true : false,

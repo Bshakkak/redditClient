@@ -13,10 +13,12 @@ function SubEntery(props){
       <>
         <li key={props.id} className={props.focus ? styles.subEnteryContainerSelected :styles.subEnteryContainer} 
         onClick={() => handleClick()} tabIndex={'1'}>
-            <div className={styles.subIcon} style={{border: `4px solid ${props.color}`}}>
-                <img src={props.icon} alt={props.name} className={styles.subIconImage}/>
+            <div className={styles.subIcon}>
+                <img src={props.icon} alt={props.name} className={styles.subIconImage} style={{border: `4px solid ${props.color}`}}/>
             </div>
-            <span style={props.mode? {color: 'white'}:{color: 'black'}}>{props.name}</span>
+            <span style={props.mode? {color: 'white'}:{color: 'black'}} className={styles.subName}>
+              {props.name}
+            </span>
         </li>
       </>
     );

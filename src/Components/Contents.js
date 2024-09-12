@@ -3,6 +3,7 @@ import Post from './Post';
 // import {postExample, postExample2, postExample3, postExample4 } from '../Images';
 // import { subredditIcon } from '../Icons';
 import LoadPost from './LoadPost';
+import ErrorPost from './ErrorPost';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectContent, isLoading, isError, fetchData } from '../Slices/subredditsSlice';
@@ -62,7 +63,11 @@ function Contents(props){
 
     return(
         <section className={styles.contentsContainer}>
-            {error && <div style={{height: '100vh'}}/>}
+            {error 
+            && 
+            <div style={{height: '100vh'}}>
+                <ErrorPost mode={props.mode}/>
+            </div>}
             {loading && <LoadPost mode={props.mode}/>}
             {!loading && !error && content.map((post, i) => <Post key={`${i}-${post.id}`} {...post} hide={false} mode={props.mode}/>)}
         </section>

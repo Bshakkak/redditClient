@@ -1,11 +1,11 @@
 import styles from '../ComponentsStyles/Subreddits.module.css';
-import { homeIcon, errorIcon } from '../Icons';
+import { homeIcon } from '../Icons';
 import SubEntery from './SubEntery';
 import LoadSubEntery from './LoadSubEntery';
 import { useState, useEffect } from 'react';
 import ToggleSwitch from './ToggleSwitch';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectPopular, isLoading, isError, fetchPopular } from '../Slices/subredditsSlice';
+import { selectPopular, isLoading, fetchPopular } from '../Slices/subredditsSlice';
 
 // const mockDate = [
 //     {id: '0001', name: 'SubReddit1', icon:subredditIcon, color: 'blue'},
@@ -33,7 +33,7 @@ import { selectPopular, isLoading, isError, fetchPopular } from '../Slices/subre
 function Subreddits({activeSide, mode, modeValue = f => f}){
     const [selectedSub, setSelectedSub] = useState(null);
     const loading = useSelector(isLoading);
-    const error = useSelector(isError);
+    // const error = useSelector(isError);
     const popular = useSelector(selectPopular);
 
     const dispatch = useDispatch();
@@ -56,18 +56,18 @@ function Subreddits({activeSide, mode, modeValue = f => f}){
                         <h2 style={mode? {color: 'white'}:{color: '#5f5f5f'}}>Subreddits</h2>
                         <ToggleSwitch className={styles.toggleSwitchSide} mode={mode} setMode={modeValue}/>
                     </div>
-                    {error && 
+                    {/* {error && 
                     <>
                         <SubEntery key={'error-load'} id={'error-load'} name={'Error'} icon={errorIcon} color={'transparent'} mode={mode} 
                         focus={selectedSub === 'error-load'} setFocus={setSelectedSub} fetchURL={""}/>
-                    </>}
+                    </>} */}
                     {loading && 
                     <>
                         <SubEntery key={'home-reddit-load'} id={'home-reddit-load'} name={'Feed'} icon={homeIcon} color={'transparent'} 
                         focus={selectedSub === 'home-reddit'} setFocus={setSelectedSub} fetchURL={"https://www.reddit.com/.json"} mode={mode}/>
                         {popular.filter(item => item.id !== 'home-reddit').map(item => <LoadSubEntery {...item}/>)}
                     </>}
-                    {!loading && !error && popular.map((item,i) => 
+                    {!loading && popular.map((item,i) => 
                         <SubEntery key={`${i}-${i*i}-${item.id}`} id={`${i}-${i*i}-${item.id}`} name={item.name} icon={item.icon} color={item.color}
                         focus={selectedSub === item.id} setFocus={setSelectedSub} fetchURL={item.fetchURL} mode={mode}/>
                     )}

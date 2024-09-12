@@ -62,7 +62,7 @@ function Post(props){
                         </button>
                     </form>
                     <div className={styles.mainPostContent}>
-                        <h2>{props.title}</h2>
+                        <h2 onClick={() => {window.location.href = props.postLink}}>{props.title}</h2>
                         {/* votes tablet*/}
                         <div className={styles.votesSection2Container}>
                             <form className={styles.votesSection2} onSubmit={handleSubmit}>
@@ -80,7 +80,7 @@ function Post(props){
                         {/* different urls for posts and crossposts*/}
                         {!props.cross && <>{props.image ? 
                         (!props.isVideo  ?
-                            <img src={props.onreddit ? props.image : props.thumbnail} alt={props.title} className={styles.postImage}/>
+                            <img src={props.onreddit ? props.image : props.thumbnail} alt={props.title} className={props.onreddit? styles.postImage : styles.postThumb}/>
                             :
                             <video controls autoPlay className={styles.postImage}>
                                 <source src={props.media} type='video/mp4'/>
@@ -92,7 +92,7 @@ function Post(props){
                         }</>}
                         {props.cross && <>{props.image_alt ? 
                         (!props.isVideo_alt  ?
-                            <img src={props.onreddit ? props.image_alt : props.thumbnail} alt={props.title} className={styles.postImage}/>
+                            <img src={props.onreddit ? props.image_alt : props.thumbnail} alt={props.title} className={props.onreddit? styles.postImage : styles.postThumb}/>
                             :
                             <video controls autoPlay className={styles.postImage}>
                                 <source src={props.media_alt} type='video/mp4'/>
@@ -115,6 +115,24 @@ function Post(props){
                                 style={showComments? {backgroundColor: 'rgb(170, 170, 253)'}:{}}>
                                {!props.hide && <img src={commentIcon} alt='comment'/>}
                                <span>{props.commentsNumber}</span>
+                            </div>
+                        </footer>
+                        <footer className={styles.creatorSectionMini}>
+                            <div className={styles.upperCreator}>
+                                <div className={!props.mode ? styles.postOwnerMini : styles.postOwnerDarkMini}>
+                                    {!props.hide && <img src={props.profile} alt='profile'/>}
+                                    <span>{props.profileName}</span>
+                                </div>
+                            </div>
+                            <div className={styles.lowerCreator}>
+                                <div className={!props.mode ? styles.creationTimeMini : styles.creationTimeDarkMini}>
+                                    <span>{props.postTime}</span>
+                                </div>
+                                <div className={!props.mode ? styles.commentsHolderMini : styles.commentsHolderDarkMini} onClick={() => setShowComments(prev => !prev)}
+                                    style={showComments? {backgroundColor: 'rgb(170, 170, 253)'}:{}}>
+                                {!props.hide && <img src={commentIcon} alt='comment'/>}
+                                <span>{props.commentsNumber}</span>
+                                </div>
                             </div>
                         </footer>
                     {showComments && <Comments mode={props.mode}/>}
