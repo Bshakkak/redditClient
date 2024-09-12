@@ -32,7 +32,7 @@
     justify-content: center;
     align-items: center;
     background-color: tomato;
-    animation: shimmerError 3s linear;
+    animation: shimmerError 3.5s linear;
 }
 
 @keyframes shimmer {
@@ -49,9 +49,18 @@
 
   @keyframes shimmerError {
     0% {
+      background-color: #f5f5f5;
+    }
+    25% {
+      background-color: #e6e6e6;
+    }
+    45% {
+      background-color: #f5f5f5;
+    }
+    55% {
       background-color: crimson;
     }
-    50% {
+    75% {
       background-color: salmon;
     }
     100% {
@@ -78,6 +87,12 @@
   text-align: center;
 }
 
-.dummyError span{
+.dummyError{
   margin: auto;
+  opacity: 0;
+  transition: opacity 3s ease-in-out;
+}
+
+.dummyError.show{
+  opacity: 1;
 }
