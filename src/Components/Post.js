@@ -3,6 +3,8 @@ import { ArrowUp, commentIcon } from '../Icons';
 import { useState, useEffect } from 'react';
 import Comments from './Comments';
 import { placeHolder2 } from '../Images';
+import { useDispatch } from 'react-redux';
+import { fetchCurrentComment } from '../Slices/subredditsSlice';
 
 function Post(props){
     const [arrowsColor, setArrowsColor] = useState(() => {
@@ -45,9 +47,15 @@ function Post(props){
             } 
         }
     }
+    const dispatch = useDispatch();
     const handleSubmit = (e) =>{
         e.preventDefault();
     }
+    const handleCommentsShow = (subreddit, id, title) =>{
+        dispatch(fetchCurrentComment({subreddit, id, title}));
+        setShowComments(prev => !prev);
+    }
+
     return(
         <>
             <article className={props.mode ? styles.postContainerDark : styles.postContainer}>
@@ -111,7 +119,7 @@ function Post(props){
                             <div className={!props.mode ? styles.creationTime : styles.creationTimeDark}>
                                 <span>{props.postTime}</span>
                             </div>
-                            <div className={!props.mode ? styles.commentsHolder : styles.commentsHolderDark} onClick={() => setShowComments(prev => !prev)}
+                            <div className={!props.mode ? styles.commentsHolder : styles.commentsHolderDark} onClick={() => handleCommentsShow(props.subreddit, props.id, props.title)}
                                 style={showComments? {backgroundColor: 'rgb(170, 170, 253)'}:{}}>
                                {!props.hide && <img src={commentIcon} alt='comment'/>}
                                <span>{props.commentsNumber}</span>
@@ -128,17 +136,16 @@ function Post(props){
                                 <div className={!props.mode ? styles.creationTimeMini : styles.creationTimeDarkMini}>
                                     <span>{props.postTime}</span>
                                 </div>
-                                <div className={!props.mode ? styles.commentsHolderMini : styles.commentsHolderDarkMini} onClick={() => setShowComments(prev => !prev)}
+                                <div className={!props.mode ? styles.commentsHolderMini : styles.commentsHolderDarkMini} onClick={() => handleCommentsShow(props.subreddit, props.id, props.title)}
                                     style={showComments? {backgroundColor: 'rgb(170, 170, 253)'}:{}}>
                                 {!props.hide && <img src={commentIcon} alt='comment'/>}
                                 <span>{props.commentsNumber}</span>
                                 </div>
                             </div>
                         </footer>
-                    {showComments && <Comments mode={props.mode}/>}
+                        { showComments && <Comments mode={props.mode} id={props.id}/> }
                     </div>
                 </div>
-    
             </article>
         </>
     );

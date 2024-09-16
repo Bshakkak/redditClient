@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import {formatResponseContent, fetchAuthorIcon } from '../HelperFunctions/formatResponseContent'
+import {formatResponseContent, fetchAuthorIcon, fetchComments } from '../HelperFunctions/formatResponseContent'
 import formatPopular from "../HelperFunctions/formatPopular";
 import { homeIcon } from "../Icons";
 
@@ -18,6 +18,10 @@ export const fetchPopular = createAsyncThunk('subreddits/fetchPopular', async ()
     return data;
 })
 
+export const fetchCurrentComment = createAsyncThunk('subreddits/fetchCurrentComment', async ({subreddit, id, title})=>{
+    return await fetchComments(subreddit, id, title);
+})
+
 export const subredditsSlice = createSlice({
     name: 'subreddits',
     initialState: {
@@ -29,6 +33,7 @@ export const subredditsSlice = createSlice({
             color: 'transparent',
             fetchURL: "https://www.reddit.com/.json?limit=10"
         }],
+        comments: [],
         loading: false,
         error: false
     },
@@ -64,12 +69,26 @@ export const subredditsSlice = createSlice({
         [fetchData.rejected]: (state, action) =>{
             state.loading = false;
             state.error = true;
+        },
+        [fetchCurrentComment.pending]: (state, action) =>{
+            // state.loading = true;
+            // state.error = false;
+        },
+        [fetchCurrentComment.fulfilled]: (state, action) =>{
+            // state.loading = false;
+            // state.error = false;
+            state.comments = Array.from(new Set([...state.comments, ...action.payload]));
+        },
+        [fetchCurrentComment.rejected]: (state, action) =>{
+            // state.loading = false;
+            // state.error = true;
         }
     }
 });
 
 export const selectContent = (state) => state.subreddits.content;
 export const selectPopular = (state) => state.subreddits.popular;
+export const selectComments = (state) => state.subreddits.comments;
 export const isLoading = (state) => state.subreddits.loading;
 export const isError = (state) => state.subreddits.error;
 

@@ -4,7 +4,7 @@ export const fetchAuthorIcon = async (author) =>{
     try{
         const response = await fetch(`https://www.reddit.com/user/${author}/about.json`);
         if(response.ok){
-            let result = response.json();
+            let result = await response.json();
             return result.data.snoovatar_img ? result.data.snoovatar_img : subredditIcon
         }else{
             return subredditIcon;
@@ -13,6 +13,60 @@ export const fetchAuthorIcon = async (author) =>{
         console.log(e);
     }
 }
+
+function extractText(htmlString) {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(htmlString, 'text/html');
+  return doc.body.textContent;  
+}
+
+function removeUrls(text) {
+  const urlRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g;
+  return text.replace(urlRegex, '');
+}
+
+export const fetchComments = async (subreddit, id, title="")=>{
+    try{
+        let titleFormat = title.split(' ').join('_');
+        const response = await fetch(`https://www.reddit.com/r/${subreddit}/comments/${id}/${titleFormat}.json`);
+        // console.log(subreddit, id, titleFormat);
+        if(response.ok){
+          let result = await response.json();
+          let comments = result[1].data.children.map(item =>({
+            postId: id,
+            id: item.data.id,
+            Icon: subredditIcon,
+            time: formatTimestamp(item.data.created_utc),
+            name: item.data.author,
+            comment: item.data.body
+          }));
+          // console.log(comments);
+          return comments;
+        }else{
+          return []
+        }
+    }catch(e){
+      console.log(e);
+      const altResponse = await fetch(`https://www.reddit.com/r/${subreddit}/comments/${id}.json`);
+      if(altResponse.ok){
+      let altResult = await altResponse.json();
+      let altComments = altResult[1].data.children.map(item =>({
+            postId: id,
+            id: item.data.id,
+            Icon: subredditIcon,
+            time: formatTimestamp(item.data.created_utc),
+            name: item.data.author,
+            comment: item.data.body
+          }));
+          return altComments;
+        }
+      else{
+      return [];
+      }
+    }
+} 
+
+
 
 const formatNumbers = num => num.toString().length > 3 ? `${num.toString().slice(0, 3)}K` : num;
 
@@ -42,6 +96,7 @@ export const formatResponseContent = (data) =>{
         id: item.data.id,
         votes: formatNumbers(item.data.score),
         title: item.data.title,
+        subreddit: item.data.subreddit,
         postLink: `https://www.reddit.com${item.data.permalink}`,
         image: item.data.url_overridden_by_dest,
         profile: subredditIcon, //await fetchAuthorIcon(item.data.author),
