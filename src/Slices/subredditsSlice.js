@@ -34,8 +34,15 @@ export const subredditsSlice = createSlice({
             fetchURL: "https://www.reddit.com/.json?limit=10"
         }],
         comments: [],
+        contentBackup: [],
         loading: false,
         error: false
+    },
+    reducers: {
+        filterPosts: (state, action) =>{
+            state.content = [...state.contentBackup];
+            state.content = state.content.filter(item => item.title.toLowerCase().includes(action.payload.toLowerCase()));
+        }
     },
     extraReducers: {
         [fetchPopular.pending]: (state, action) =>{
@@ -64,6 +71,7 @@ export const subredditsSlice = createSlice({
         [fetchData.fulfilled]: (state, action) =>{
             state.loading = false;
             state.error = false;
+            state.contentBackup = action.payload;
             state.content = action.payload;
         },
         [fetchData.rejected]: (state, action) =>{
@@ -91,5 +99,6 @@ export const selectPopular = (state) => state.subreddits.popular;
 export const selectComments = (state) => state.subreddits.comments;
 export const isLoading = (state) => state.subreddits.loading;
 export const isError = (state) => state.subreddits.error;
+export const {filterPosts} = subredditsSlice.actions;
 
 export default subredditsSlice.reducer;
