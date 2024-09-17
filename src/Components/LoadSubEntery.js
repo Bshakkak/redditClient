@@ -9,7 +9,7 @@ function LoadSubEntery(props){
                 <div className={styles.subIcon} style={{border: `4px solid white`}}>
                     <img src={subredditIcon} alt={props.name} className={styles.subIconImage}/>
                 </div>
-                <span style={{visibility: 'hidden'}}>{'Subholder'}</span>
+                <span style={{visibility: 'hidden'}}>{props.name}</span>
             </div>
         </li>
         </>

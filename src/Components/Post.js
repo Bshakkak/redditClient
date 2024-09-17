@@ -2,6 +2,9 @@ import styles from '../ComponentsStyles/Post.module.css';
 import { ArrowUp, commentIcon } from '../Icons';
 import { useState, useEffect } from 'react';
 import Comments from './Comments';
+import { placeHolder2 } from '../Images';
+import { useDispatch } from 'react-redux';
+import { fetchCurrentComment } from '../Slices/subredditsSlice';
 
 function Post(props){
     const [arrowsColor, setArrowsColor] = useState(() => {
@@ -44,9 +47,16 @@ function Post(props){
             } 
         }
     }
+    const dispatch = useDispatch();
     const handleSubmit = (e) =>{
         e.preventDefault();
+        console.log('For demonstration only...','Requires OAuth2 Reddit API while the project uses Reddit API');
     }
+    const handleCommentsShow = (subreddit, id, title) =>{
+        dispatch(fetchCurrentComment({subreddit, id, title}));
+        setShowComments(prev => !prev);
+    }
+
     return(
         <>
             <article className={props.mode ? styles.postContainerDark : styles.postContainer}>
@@ -61,7 +71,7 @@ function Post(props){
                         </button>
                     </form>
                     <div className={styles.mainPostContent}>
-                        <h2>{props.title}</h2>
+                        <h2 onClick={() => {window.location.href = props.postLink}}>{props.title}</h2>
                         {/* votes tablet*/}
                         <div className={styles.votesSection2Container}>
                             <form className={styles.votesSection2} onSubmit={handleSubmit}>
@@ -76,7 +86,32 @@ function Post(props){
                         </div>
                         
                         {/* end votes tablet*/}
-                        <img src={props.image} alt='post example' className={styles.postImage}/>
+                        {/* different urls for posts and crossposts*/}
+                        {!props.cross && <>{props.image ? 
+                        (!props.isVideo  ?
+                            <img src={props.onreddit ? props.image : props.thumbnail} alt={props.title} className={props.onreddit? styles.postImage : styles.postThumb}/>
+                            :
+                            <video controls autoPlay className={styles.postImage}>
+                                <source src={props.media} type='video/mp4'/>
+                            </video>)
+                        :
+                        <div style={{width: '100%'}}>
+                           { <img src={placeHolder2} alt='' className={styles.postImage} style={{visibility: 'hidden'}}/>}
+                        </div>
+                        }</>}
+                        {props.cross && <>{props.image_alt ? 
+                        (!props.isVideo_alt  ?
+                            <img src={props.onreddit ? props.image_alt : props.thumbnail} alt={props.title} className={props.onreddit? styles.postImage : styles.postThumb}/>
+                            :
+                            <video controls autoPlay className={styles.postImage}>
+                                <source src={props.media_alt} type='video/mp4'/>
+                            </video>)
+                        :
+                        <div style={{width: '100%'}}>
+                            { <img src={placeHolder2} alt='' className={styles.postImage} style={{visibility: 'hidden'}}/>}
+                        </div>
+                        }</>}
+
                         <footer className={styles.creatorSection}>
                             <div className={!props.mode ? styles.postOwner : styles.postOwnerDark}>
                                 {!props.hide && <img src={props.profile} alt='profile'/>}
@@ -85,16 +120,33 @@ function Post(props){
                             <div className={!props.mode ? styles.creationTime : styles.creationTimeDark}>
                                 <span>{props.postTime}</span>
                             </div>
-                            <div className={!props.mode ? styles.commentsHolder : styles.commentsHolderDark} onClick={() => setShowComments(prev => !prev)}
+                            <div className={!props.mode ? styles.commentsHolder : styles.commentsHolderDark} onClick={() => handleCommentsShow(props.subreddit, props.id, props.title)}
                                 style={showComments? {backgroundColor: 'rgb(170, 170, 253)'}:{}}>
                                {!props.hide && <img src={commentIcon} alt='comment'/>}
                                <span>{props.commentsNumber}</span>
                             </div>
                         </footer>
-                    {showComments && <Comments mode={props.mode}/>}
+                        <footer className={styles.creatorSectionMini}>
+                            <div className={styles.upperCreator}>
+                                <div className={!props.mode ? styles.postOwnerMini : styles.postOwnerDarkMini}>
+                                    {!props.hide && <img src={props.profile} alt='profile'/>}
+                                    <span>{props.profileName}</span>
+                                </div>
+                            </div>
+                            <div className={styles.lowerCreator}>
+                                <div className={!props.mode ? styles.creationTimeMini : styles.creationTimeDarkMini}>
+                                    <span>{props.postTime}</span>
+                                </div>
+                                <div className={!props.mode ? styles.commentsHolderMini : styles.commentsHolderDarkMini} onClick={() => handleCommentsShow(props.subreddit, props.id, props.title)}
+                                    style={showComments? {backgroundColor: 'rgb(170, 170, 253)'}:{}}>
+                                {!props.hide && <img src={commentIcon} alt='comment'/>}
+                                <span>{props.commentsNumber}</span>
+                                </div>
+                            </div>
+                        </footer>
+                        { showComments && <Comments mode={props.mode} id={props.id}/> }
                     </div>
                 </div>
-    
             </article>
         </>
     );

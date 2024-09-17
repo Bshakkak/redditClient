@@ -3,15 +3,23 @@ import {redditIcon, searchIcon } from '../Icons';
 import ToggleSwitch from './ToggleSwitch';
 import { useState, useEffect } from 'react';
 import { menuIcon, closeIcon, leftArrow } from '../Icons';
+import { useDispatch } from 'react-redux';
+import { filterPosts } from '../Slices/subredditsSlice';
 
 function Navbar({activeSide = f => f, modeValue = f => f, mode}){
     const [menuToggle, setMenuToggle] = useState(false);
     // const [mode, setMode] = useState(false);
     const [miniSearch, setMiniSearch] = useState(false);
-
+    const [searchTerm, setSearchTerm] = useState('');
+    const dispatch = useDispatch();
+    
     const handleSubmit = (e) =>{
         e.preventDefault();
-        alert('Data submitted!');
+        dispatch(filterPosts(searchTerm));
+    }
+
+    const handleChange = (e) =>{
+        setSearchTerm(e.target.value);
     }
 
     useEffect(()=>{
@@ -47,7 +55,7 @@ function Navbar({activeSide = f => f, modeValue = f => f, mode}){
             </div>
             <div className={styles.formContainer} tabIndex={'1'}>
                 <form className={styles.formSearch} onSubmit={handleSubmit}>
-                    <input className={styles.formInput} type='text' placeholder='Search'/>
+                    <input className={styles.formInput} type='text' placeholder='Search' onChange={handleChange}/>
                     <button className={styles.searchBTNContainer} type='submit'>
                         <img className={styles.searchBTN} src={searchIcon} alt='Search Icon' style={mode? {filter: 'invert(100%)'}:{filter: 'invert(0%)'}}/>
                     </button>
@@ -57,7 +65,7 @@ function Navbar({activeSide = f => f, modeValue = f => f, mode}){
                     <button className={`${styles.searchBTNContainer}`} type='submit'>
                         <img className={styles.searchBTN} src={leftArrow} alt='Submit search' style={mode? {filter: 'invert(100%)'}:{filter: 'invert(0%)'}}/>
                     </button>
-                    <input className={`${styles.formInput}`} type='text' placeholder='Search'/>
+                    <input className={`${styles.formInput}`} type='text' placeholder='Search' onChange={handleChange}/>
                     </>}
                     <div className={styles.searchBTNContainer}>
                         <img className={styles.searchBTN} src={searchIcon} alt='Search Icon' 

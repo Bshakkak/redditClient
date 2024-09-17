@@ -9,7 +9,8 @@ import leftArrow from './left-arrow.svg';
 import subredditIcon from './subreddit-icon.svg';
 import commentIcon from './comment-icon.svg';
 import ArrowUp from './ArrowUp';
-
+import homeIcon from './home-icon.svg';
+import errorIcon from './error-icon.svg';
 
 export{
     redditIcon,
@@ -23,4 +24,6 @@ export{
     subredditIcon,
     ArrowUp,
     commentIcon,
+    homeIcon,
+    errorIcon
 };

@@ -4,3 +4,15 @@
     margin: 1.5rem;
     width: fit-content;
 }
+
+.errorPage{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.errorPage span{
+    font-size: 1.5rem;
+    font-weight: 700;
+}
