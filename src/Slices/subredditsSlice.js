@@ -5,17 +5,25 @@ import { homeIcon } from "../Icons";
 
 export const fetchData = createAsyncThunk('subreddits/fetchData', async (url)=>{
     const response = await fetch(url);
+    if(response.ok){
     let data = await response.json();
     data = formatResponseContent(data);
     let profile = await fetchAuthorIcon(data.profileName);
     data.profile = profile;
-    return data;
+    return data;}
+    else{
+        return [];
+    }
 });
 
 export const fetchPopular = createAsyncThunk('subreddits/fetchPopular', async ()=>{
-    const response = await fetch('https://www.reddit.com/subreddits/popular.json?limit=8');
+    const response = await fetch('https://www.reddit.com/subreddits/popular.json?limit=7');
+    if(response.ok){
     const data = await response.json();
-    return data;
+    return data;}
+    else{
+        return [];
+    }
 })
 
 export const fetchCurrentComment = createAsyncThunk('subreddits/fetchCurrentComment', async ({subreddit, id, title})=>{
@@ -35,8 +43,10 @@ export const subredditsSlice = createSlice({
         }],
         comments: [],
         contentBackup: [],
+        popularBackup: [],
         loading: false,
-        error: false
+        error: false,
+        loadingComment: false
     },
     reducers: {
         filterPosts: (state, action) =>{
@@ -52,6 +62,15 @@ export const subredditsSlice = createSlice({
         [fetchPopular.fulfilled]: (state, action)=>{
             state.loading = false;
             state.error = false;
+            if(action.payload.length > 0) {
+                state.popularBackup = [{
+                id: 'home-reddit',
+                name: 'Feed',
+                icon: homeIcon,
+                color: 'transparent',
+                fetchURL: "https://www.reddit.com/.json?limit=10"
+            }, ...formatPopular(action.payload)];
+            }
             state.popular = [{
                 id: 'home-reddit',
                 name: 'Feed',
@@ -63,6 +82,7 @@ export const subredditsSlice = createSlice({
         [fetchPopular.rejected]: (state, action) =>{
             state.loading = false;
             state.error = true;
+            state.popular = state.popularBackup
         },
         [fetchData.pending]: (state, action) =>{
             state.loading = true;
@@ -71,24 +91,27 @@ export const subredditsSlice = createSlice({
         [fetchData.fulfilled]: (state, action) =>{
             state.loading = false;
             state.error = false;
-            state.contentBackup = action.payload;
+            if(action.payload.length > 0) {
+                state.contentBackup = action.payload;
+            }
             state.content = action.payload;
         },
         [fetchData.rejected]: (state, action) =>{
             state.loading = false;
             state.error = true;
+            state.content = state.contentBackup;
         },
         [fetchCurrentComment.pending]: (state, action) =>{
-            // state.loading = true;
+            state.loadingComment = true;
             // state.error = false;
         },
         [fetchCurrentComment.fulfilled]: (state, action) =>{
-            // state.loading = false;
+            state.loadingComment = false;
             // state.error = false;
             state.comments = Array.from(new Set([...state.comments, ...action.payload]));
         },
         [fetchCurrentComment.rejected]: (state, action) =>{
-            // state.loading = false;
+            state.loadingComment = false;
             // state.error = true;
         }
     }
@@ -99,6 +122,7 @@ export const selectPopular = (state) => state.subreddits.popular;
 export const selectComments = (state) => state.subreddits.comments;
 export const isLoading = (state) => state.subreddits.loading;
 export const isError = (state) => state.subreddits.error;
+export const isLoadingComment = (state) => state.subreddits.loadingComment;
 export const {filterPosts} = subredditsSlice.actions;
 
 export default subredditsSlice.reducer;

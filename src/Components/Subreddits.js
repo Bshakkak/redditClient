@@ -53,8 +53,8 @@ function Subreddits({activeSide, mode, modeValue = f => f}){
                 
                 <ul className={styles.listContainer}>
                     <div key={'list-headers'} className={styles.subHeader}>
-                        <h2 style={mode? {color: 'white'}:{color: '#5f5f5f'}}>Subreddits</h2>
-                        <ToggleSwitch className={styles.toggleSwitchSide} mode={mode} setMode={modeValue}/>
+                        <h2 key={'titleWithin'} style={mode? {color: 'white'}:{color: '#5f5f5f'}}>Subreddits</h2>
+                        <ToggleSwitch key={'toggleWithin'} className={styles.toggleSwitchSide} mode={mode} setMode={modeValue}/>
                     </div>
                     {/* {error && 
                     <>

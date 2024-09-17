@@ -14,16 +14,16 @@ export const fetchAuthorIcon = async (author) =>{
     }
 }
 
-function extractText(htmlString) {
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(htmlString, 'text/html');
-  return doc.body.textContent;  
-}
+// function extractText(htmlString) {
+//   const parser = new DOMParser();
+//   const doc = parser.parseFromString(htmlString, 'text/html');
+//   return doc.body.textContent;  
+// }
 
-function removeUrls(text) {
-  const urlRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g;
-  return text.replace(urlRegex, '');
-}
+// function removeUrls(text) {
+//   const urlRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g;
+//   return text.replace(urlRegex, '');
+// }
 
 export const fetchComments = async (subreddit, id, title="")=>{
     try{
@@ -46,7 +46,7 @@ export const fetchComments = async (subreddit, id, title="")=>{
           return []
         }
     }catch(e){
-      console.log(e);
+      // console.log(e);
       const altResponse = await fetch(`https://www.reddit.com/r/${subreddit}/comments/${id}.json`);
       if(altResponse.ok){
       let altResult = await altResponse.json();

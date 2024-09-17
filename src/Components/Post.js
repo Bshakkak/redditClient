@@ -50,6 +50,7 @@ function Post(props){
     const dispatch = useDispatch();
     const handleSubmit = (e) =>{
         e.preventDefault();
+        console.log('For demonstration only...','Requires OAuth2 Reddit API while the project uses Reddit API');
     }
     const handleCommentsShow = (subreddit, id, title) =>{
         dispatch(fetchCurrentComment({subreddit, id, title}));

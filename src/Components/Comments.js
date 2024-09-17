@@ -3,7 +3,7 @@ import styles from '../ComponentsStyles/Comments.module.css';
 // import { useState, useEffect } from 'react';
 import Comment from './Comment';
 import LoadComment from './LoadComment';
-import { isLoading, selectComments } from '../Slices/subredditsSlice';
+import { isLoadingComment, selectComments } from '../Slices/subredditsSlice';
 import { useSelector } from 'react-redux';
 
 // const mockData = [
@@ -17,7 +17,7 @@ import { useSelector } from 'react-redux';
 
 function Comments(props){
     // const [mockLoad, setMockLoad] = useState(true);
-    const loading = useSelector(isLoading);
+    const loadingComment = useSelector(isLoadingComment);
     const comments = useSelector(selectComments);
 
     // useEffect(()=>{
@@ -28,14 +28,14 @@ function Comments(props){
     // },[]);
     return(
         <div className={styles.commentsContainer}>
-            {/* {loading ? 
+            {loadingComment ? 
             <>
                 <LoadComment />
-            </>:  */}
-            <>{comments.filter(item => item.postId === props.id).map(item => (
-                <Comment {...item} mode={props.mode}/>
+            </>: 
+            <>{comments.filter(item => item.postId === props.id).map((item,i) => (
+                <Comment key={`${i}-${item.id}`} {...item} mode={props.mode}/>
             ))}
-            </>
+            </>}
         </div>
     );
 };
