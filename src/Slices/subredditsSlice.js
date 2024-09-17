@@ -108,7 +108,7 @@ export const subredditsSlice = createSlice({
         [fetchCurrentComment.fulfilled]: (state, action) =>{
             state.loadingComment = false;
             // state.error = false;
-            state.comments = Array.from(new Set([...state.comments, ...action.payload]));
+            state.comments = Array.from(new Set([...action.payload]));
         },
         [fetchCurrentComment.rejected]: (state, action) =>{
             state.loadingComment = false;
